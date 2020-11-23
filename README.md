@@ -1,6 +1,6 @@
 ## BIO634 Next-Generation Sequencing 2 – Transcriptomes, Variant Calling and Biological Interpretation
 
-## June 3-4th 2019
+## December 3-4th 2020
 
 
 ### University of Zurich
