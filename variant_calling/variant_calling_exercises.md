@@ -152,19 +152,23 @@ All but 1 variant have been filtered out as low-quality.
 
 Seeing is believing! One should always have a look at the data to get a feeling about the error rate, coverage heterogeneity, ...  
 
-Go to the Integrative Genome Viewer (IGV) website http://www.broadinstitute.org/igv/ 
+First, copy the generated files to the `storage` folder, like so:
 
-1. Open a new tab in the terminal (File | Open Tab)
-1. Go to IGV directory doing `cd ~/APPL/IGV_Linux_2.5.2/`
-2. Launch IGV doing `./igv.sh`
-3. Load the fasta file of the genome: File | Load Genome from File...  
+```cp -ap /home/student/data/data_ngs2 /home/student/storage```
+
+In this way, you can explore the files on your computer.
+
+Go to the Integrative Genome Viewer (IGV) website http://www.broadinstitute.org/igv/ and Download and Install the IGV browser locally on your computer.
+
+1. Launch IGV doing `./igv.sh`
+2. Load the fasta file of the genome: File | Load Genome from File...  
   then choose the file `EcoliDH10B.fa`
-4. Load the BAM file: File | Load from File...   
+3. Load the BAM file: File | Load from File...   
   then choose the BAM file
-5. Load the genome annotation (gff or bed): File | Load from File...  
+4. Load the genome annotation (gff or bed): File | Load from File...  
   then choose the file `EcoliDH10B.gff
 
-- Do you think some records are SNPs? Or rather sequencing errors? Look up the base call qualities at the varying positions by moving the cursor to a nucleotide.
+- Do you think some records are SNPs? Or rather sequencing errors? Look up the base call qualities at the varying positions by moving the cursor over a nucleotide.
 
 ## BAM file preprocessing
 
