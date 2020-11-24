@@ -192,18 +192,6 @@ In contrast, for GATK it is recommended to use all 3 BAM preprocessing steps. Le
 - GATK is slow and resource-hungry. If you want to run it for pooled or population data, prepare to run in on a cluster.
 - GATK is under constant development. Check the website from time to time.
 
-
-### Installing Oracle Java
-
-GATK doesn't work with JDK Java - it requires Oracle Java
-```
-# install java8 from bio634 site
-cd ~/APPL
-wget http://bioinfo.evolution.uzh.ch/share/bio634/jdk-8u211-linux-x64.tar.gz
-tar xfz jdk-8u211-linux-x64.tar.gz
-```
-
-
 The following script `Run_GATK_Ecoli.sh` runs a GATK pipeline for the *E.coli* BAM file. Change the variable BAMFILE if you have renamed the BAM file earlier.
 ```
 #!/bin/bash
