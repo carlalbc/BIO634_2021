@@ -212,17 +212,15 @@ set -o errexit
 
  # BAM processing using PICARD, SNP calling using GATK
 
-#SAMTOOLS=~/software/SAMTOOLS/samtools-1.3/samtools
 SAMTOOLS=samtools
-JAVA=~/APPL/jdk1.8.0_211/bin/java
-GATK=~/APPL/GATK/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef/GenomeAnalysisTK.jar
-PICARD=~/APPL/PICARD/picard.2.18.0.jar
+JAVA=~/software/jdk1.8.0_211/bin/java
+GATK=~/software/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef/GenomeAnalysisTK.jar
+PICARD=~/software/picard/picard.2.18.0.jar
 
  # IDEAS to improve the script:
  # add variable with memory parameter to java -Xmx6g
  # add 2> to capture errors
  # add input and output folders
-
 
 REF_FILE=EcoliDH10B.fa
 BAM_FILE=MiSeq_Ecoli_DH10B_110721_PF_subsample.bam
