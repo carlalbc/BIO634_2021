@@ -64,7 +64,21 @@ or attendance of 'BIO609 Introduction to Linux and Bash Scripting' and
 
 ## Installation Instructions for Docker
 
-Install Docker. Download the [BIO634.tar](https://bioinfo.evolution.uzh.ch/teaching/bio634.tar) file. Load the Create a storage folder on your computer. Then you can start the docker container by running:
+Install Docker. Download the [bio634.tar](https://bioinfo.evolution.uzh.ch/teaching/bio634.tar) file. Load the Docker image to the file:
+
+```
+docker load -i bio634.tar
+```
+
+Create a storage folder on your local computer. Then you can start the docker container by running:
+
+```
+docker run -v /storage:/home/student/storage --hostname ubuntu --user student --workdir="/home/student" -ti bio634 bash --login
+```
+
+In this case, the local folder is `/storage` (replace with your own local folder), which will be available on `/home/student/storage`.
+
+You can now run all exercises in this Docker container.
 
 ### Download the data for this course
 
