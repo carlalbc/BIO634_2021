@@ -25,12 +25,10 @@ The approaches presented here work for Illumina data.
 
 ### Download data
 
+The data is already stored on the Docker instance at:
 ```
-wget https://www.dropbox.com/s/hgucirf8a5iys3k/DATA_NGS2_SNP.zip?dl=0
-mv DATA_NGS2_SNP.zip?dl=0 DATA_NGS2_SNP.zip
-unzip DATA_NGS2_SNP.zip
+/home/student/data/data_ngs2
 ```
-
 
 ## SNP Calling using FreeBayes
 
