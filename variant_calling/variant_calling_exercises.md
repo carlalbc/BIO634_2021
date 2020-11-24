@@ -343,16 +343,11 @@ vt peek VCF.vcf-filtered.gz
 
 There are many software tools available for annotating variants. Many tools only work with Human and mouse variants where  lots of functional annotation are available. [SnpEff & SnpSift](http://snpeff.sourceforge.net/SnpEff.html) is widely used and is also useful for work with other organisms. SnpEff provides functions to annotate variants and predict the effects of variants on genes (such as amino acid changes), while SnpSift allows you to filter and manipulate annotated files.
 
+Now move to the snpEff directory, where the software is already installed:
 
-First download snfEff via wget (or alternatively, from the [download](http://snpeff.sourceforge.net/download.html) page):
 ```
- # Download using wget
-wget http://sourceforge.net/projects/snpeff/files/snpEff_latest_core.zip
- # Install
-$ unzip snpEff_latest_core.zip 
+cd ~/software/snpEff
 ```
-Install it in the `~/APPL` directory.
- 
 
 ### Download databases
 
@@ -383,7 +378,7 @@ You can annotate the file by running the following command (as an input, we use 
 java -Xmx4g -jar snpEff.jar -v GRCh37.75 examples/test.chr22.vcf > test.chr22.ann.vcf
 ```
 
-See the documentation for more options and functions.
+See the (snpEff documentation)[https://pcingola.github.io/SnpEff/se_running/] for more options and functions.
 
 ### Exercise: VCFtools
 
