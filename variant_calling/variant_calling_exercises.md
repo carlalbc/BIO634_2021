@@ -148,20 +148,9 @@ vt peek Ecoli_DH10B-rmdup-filtered.vcf.gz
 ```
 All but 1 variant have been filtered out as low-quality.
 
-<details>
-<summary>(Optional) An alternative graphical summary with more information using bcftools:</summary>
-```
-bcftools stats -F EcoliDH10B.fa -s - Ecoli_DH10B-rmdup.vcf.gz > Ecoli_DH10B-rmdup.vcf.gz.stats
-sudo apt-get install python-matplotlib
-sudo apt-get install texlive-latex-base exlive-latex-recommended exlive-latex-extra
-plot-vcfstats -p bcftools_plots/ Ecoli_DH10B-rmdup.vcf.gz.stats
-```
-</details>
-
-
 ### Visualize the aligned reads
 
-Seeing is believing! One should always have at look at the data to get a feeling about the error rate, coverage heterogeneity, ...  
+Seeing is believing! One should always have a look at the data to get a feeling about the error rate, coverage heterogeneity, ...  
 
 Go to the Integrative Genome Viewer (IGV) website http://www.broadinstitute.org/igv/ 
 
