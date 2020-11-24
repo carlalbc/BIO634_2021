@@ -56,27 +56,15 @@ or attendance of 'BIO609 Introduction to Linux and Bash Scripting' and
 ```
 (Unix System hierarchical tree)
 
-|--HOME--|
-      ├─APPL
-           ├── IGV/...
-           ├── FREEBAYES/...
-           ├── PICARD/...
-           ├── GATK/...
-      ├─NGS2
-	   ├─RNA-Seq
-	   ├─VariantCalling2
-        	├── Final_Results (with pre-computed results)
-            ├── ref (reference files like genomes)
-            └── scripts
-
-( more folders will be added in this level during the workshop )
+/home/student
+      /software
+      /variantcalling2
+      /rnaseq
 ```
 
+## Installation Instructions for Docker
 
-## Installation Instructions for the Virtual Machine
-
-We will reuse the Virtual Machine (VM) of the Linux course BIO609 and NGS course BIO610. However, we need to download the data for this course.
-
+Install Docker. Download the (BIO634.tar)[https://bioinfo.evolution.uzh.ch/teaching/bio634.tar] file. Load the Create a storage folder on your computer. Then you can start the docker container by running:
 
 ### Download the data for this course
 
