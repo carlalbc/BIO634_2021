@@ -378,7 +378,7 @@ You can annotate the file by running the following command (as an input, we use 
 java -Xmx4g -jar snpEff.jar -v GRCh37.75 examples/test.chr22.vcf > test.chr22.ann.vcf
 ```
 
-See the (snpEff documentation)[https://pcingola.github.io/SnpEff/se_running/] for more options and functions.
+See the [snpEff documentation](https://pcingola.github.io/SnpEff/se_running/) for more options and functions.
 
 ### Exercise: VCFtools
 
