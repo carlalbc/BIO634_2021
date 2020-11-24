@@ -45,11 +45,7 @@ gregor.rot@uzh.ch
 ## Prerequisites for the course
 
 - Basic command line 
-- Basic knowledge about NGS data structure: reads, alignments (BAM), quality scores
-
-or attendance of 'BIO609 Introduction to Linux and Bash Scripting' and  
-`BIO610 Next-Generation Sequencing 1 – Introductory Course: Assembly, Mapping, and Variant Calling
-
+- Basic knowledge about NGS data structure: reads, alignments (BAM), quality scores or attendance of 'BIO609 Introduction to Linux and Bash Scripting' and `BIO610 Next-Generation Sequencing 1 – Introductory Course: Assembly, Mapping, and Variant Calling`
 
 ## Directory structure
 
