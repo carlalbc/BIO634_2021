@@ -64,7 +64,7 @@ or attendance of 'BIO609 Introduction to Linux and Bash Scripting' and
 
 ## Installation Instructions for Docker
 
-Install Docker. Download the [bio634.tar](https://bioinfo.evolution.uzh.ch/teaching/bio634.tar) file. Load the Docker image to the file:
+Install [Docker](https://www.docker.com/). Download the [bio634.tar](https://bioinfo.evolution.uzh.ch/teaching/bio634.tar) file. Load the Docker image to the file:
 
 ```
 docker load -i bio634.tar
