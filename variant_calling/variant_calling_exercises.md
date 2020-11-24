@@ -144,7 +144,7 @@ Like this we remove all low-quality variants:
 ```
 sudo apt install bcftools # install bcftools
 bcftools filter -O z -o Ecoli_DH10B-rmdup-filtered.vcf.gz -i'%QUAL>10' Ecoli_DH10B-rmdup.vcf.gz
-vt peek Ecoli_DH10B-rmdup.vcf.gz
+vt peek Ecoli_DH10B-rmdup-filtered.vcf.gz
 ```
 All but 1 variant have been filtered out as low-quality.
 
@@ -175,9 +175,7 @@ Go to the Integrative Genome Viewer (IGV) website http://www.broadinstitute.org/
 5. Load the genome annotation (gff or bed): File | Load from File...  
   then choose the file `EcoliDH10B.gff
 
-
 - Do you think some records are SNPs? Or rather sequencing errors? Look up the base call qualities at the varying positions by moving the cursor to a nucleotide.
-
 
 ## BAM file preprocessing
 
