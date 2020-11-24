@@ -142,7 +142,6 @@ This typically leads to NGS pipelines that maximize sensitivity, leading to a **
 
 Like this we remove all low-quality variants:
 ```
-sudo apt install bcftools # install bcftools
 bcftools filter -O z -o Ecoli_DH10B-rmdup-filtered.vcf.gz -i'%QUAL>10' Ecoli_DH10B-rmdup.vcf.gz
 vt peek Ecoli_DH10B-rmdup-filtered.vcf.gz
 ```
