@@ -57,9 +57,11 @@ or attendance of 'BIO609 Introduction to Linux and Bash Scripting' and
 (Unix System hierarchical tree)
 
 /home/student
-      /software
-      /variantcalling2
-      /rnaseq
+            /software
+            /variantcalling2
+            /rnaseq
+            /data
+                /data_ngs2
 ```
 
 ## Installation Instructions for Docker
