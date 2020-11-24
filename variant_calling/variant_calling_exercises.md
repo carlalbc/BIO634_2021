@@ -382,7 +382,7 @@ See the [snpEff documentation](https://pcingola.github.io/SnpEff/se_running/) fo
 
 ### Exercise: VCFtools
 
-VCFtools are specialized tools for working with VCF files: validating, filtering merging, comparing and calculate some basic population genetic statistics (see the documentation http://vcftools.sourceforge.net/docs.html). There are many other tools with similar functionality available for the same purpose.
+VCFtools are specialized tools for working with VCF files: validating, filtering merging, comparing and calculate some basic population genetic statistics, [see the documentation](http://vcftools.sourceforge.net/docs.html). There are many other tools with similar functionality available for the same purpose.
 ￼￼￼￼￼￼
 ### Exercise: How many low-coverage regions?
 
@@ -436,8 +436,7 @@ Choose an appropriate program and map the reads. As for other variant callers, c
 - Determine the approximate depth of mapped read coverage for each sequencing data set.
 - Try using different mappers or changing the default alignment settings to find more variants.
 
-
-### Run FreeBayes
+### Run freeBayes
 
 FreeBayes can be used to treat the sample as a mixture of pooled samples. (In our case it is actually a mixture of >1 million bacteria, but we have nowhere near that level of coverage, so we give an arbitrary mixed ploidy of 100, which means we use a statistical model that predicts variants only with frequencies of 1%, 2%, 3%, ... 98%, 99%, 100%). This command runs pretty fast, so you can do it in interactive mode.
 Example command for running freebayes
@@ -499,43 +498,4 @@ $SAMTOOLS index Ecoli_DH10B-fixmate-mdup.bam
 
  # call variants
 $FREEBAYES -f EcoliDH10B.fa -p 1 Ecoli_DH10B-fixmate-mdup.bam > Ecoli_DH10B-fixmate-mdup.vcf
-```
-
-
-### Install software
-
-
-
-#### Install vt
-
-Go to the `~/APPL` folder and build & install vt:
-
-```
-git clone https://github.com/atks/vt
-cd vt
-make
-```
-
-Export the path to vt like this:
-```
-export PATH=~/APPL/vt:$PATH
-```
-
-#### Add directory to the PATH permanently
-
-An export command works only temporarily
-```
-export PATH=~/APPL/vt:$PATH
-```
-
-To make it permanent we have to add the line to the file `~/.bashrc`
-
-In order to immediately reflect changes execute `source ~/.bashrc` 
-
-#### An alternative graphical summary with more information using bcftools:
-```
-bcftools stats -F EcoliDH10B.fa -s - Ecoli_DH10B-rmdup.vcf.gz > Ecoli_DH10B-rmdup.vcf.gz.stats
-sudo apt-get install python-matplotlib
-sudo apt-get install texlive-latex-base
-plot-vcfstats -p bcftools_plots/ Ecoli_DH10B-rmdup.vcf.gz.stats
 ```
