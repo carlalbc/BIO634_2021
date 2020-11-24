@@ -82,45 +82,6 @@ In this case, the local folder is `/storage` (replace with your own local folder
 
 You can now run all exercises in this Docker container.
 
-### Download the data for this course
-
-- Start the VM and login
-- Open a terminal
-- Download the file by typing `wget url` (Note to myself: Use URL shortener)
-- Unzip the file: `unzip data_NGS2.zip`
-
-
-### If you have *not* yet installed the VM 
-- Download the virtual machine manager VirtualBox, from [virtualbox.org](https://www.virtualbox.org/). Make sure you pick the right operation system for your laptop. 
-- Install VirtualBox on your machine
-- Download the VM image (~4 GB) from dropfiles.uzh. Ask for the link.
-- Run VirtualBox and do `File | Import Appliance` from the menu. Choose the VM image you just downloaded (file with extension .OVA). This will trigger a menu where you can change the Appliance settings. We recommend giving the VM as much memory as you can given your local machine (about 2/3 of the total memory, but between 2-4 GB). Start the import process.
-
-Now you can start the VM by selecting it in the list and clicking on the Start button. Login and proceed with the instructions 
-
-### Copy/paste doesn't work in the command window
-
-To copy, select text and click the title bar and go to Edit->Copy. You can use Edit->Paste to paste.  
-  
-  
-The usual shortcuts for copy/paste don't work in the virtual machine. For Macs use ctrl+shift+C for copying and ctrl+shift+v for pasting.  
-  
-You can also setup shared folders between the VM and the host system. See below or ask us how to do it.
-
-### Adding Shared Folders
-
-It is possible to share data (read/write/copy files) between Virtual Machine and your host operating system (e.g. Mac OS or Windows). By default no access is granted, we have to configure it: 
-
-1. Share a folder in your operating system  
-   With a running VM go to the menu of the VirtualBox software `Devices | Shared Folder Settings…` and add 1 or multiple folders
-2. In Ubuntu VM, go to the terminal and type:  
-`usermod -aG vboxsf student`           
- (student is our username)
-3. Reboot the VM
-
-On Ubuntu the shared folder is located in the path `/media`
-
-
 ## Recommended books (Practical Computing Skills)
 
 - [Haddock & Dunn. Practical Computing for Biologists. Sinauer Associates 2011.](http://practicalcomputing.org)  
