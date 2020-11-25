@@ -91,7 +91,7 @@ Press the "+ (more)" button multiple times and see how the network grows (the sa
 Make an Enrichment analysis with "GO Biological Processes" and "KEGG pathways"
 Remove genes not connected to any other genes by going to "Settings", "hide disconnected nodes in the network".
 
-## Gene Set Enrichment Analysis (GSEA)
+## Gene Set Enrichment Analysis (GSEA), optional
 
 Gene Set Enrichment Analysis (GSEA) is a more sensitive and robust alternative to Over-Representation Analysis. It does not require a (somewhat
 arbitrary) significance cut-off but it uses the ranked list of all genes.
@@ -110,12 +110,13 @@ awk '$5<1 {factor=-1} NR>1 {print $1"\t"$8*factor;factor=1}' diffExp_N-A.txt | s
 We also have to provide *gene sets*. The GSEA gene set files are available for human only therefore we use the file 
 Mus_musculus_GSEA_GO_sets_all_ids_highquality_April_2015.gmt.
 
-Now we are ready to run GSEA. Download GSEA and the mouse gene sets in the virtual machine:
+Now we are ready to run GSEA. [Download GSEA for your OS](https://www.gsea-msigdb.org/gsea/downloads.jsp) (maybe you will have to register) and then download the mouse gene sets to the storage folder on Docker:
 ```
-wget http://bioinfo.evolution.uzh.ch/share/bio634/gsea-3.0.jar
+cd /home/student/storage
 wget http://bioinfo.evolution.uzh.ch/share/bio634/Mus_musculus_GSEA_GO_sets_all_ids_highquality_April_2015.gmt
-java -Xmx1000m -jar gsea2-2.0.14.jar # launch GSEA
 ```
+
+Launch GSEA on your computer.
 
 Next we load the data. 
 - Click on the on the left <Load data> and <Browse for files...> then select the 2 required files.
