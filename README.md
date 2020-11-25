@@ -7,11 +7,7 @@
 ### URPP Evolution in Action
 ![URPP logo](Logo_URPP_kl2.png)
 
-Carla Bello & Gregor Rot
- 
-carla.bello@ieu.uzh.ch
-gregor.rot@uzh.ch 
-
+Carla Bello (carla.bello@ieu.uzh.ch) & Gregor Rot (gregor.rot@uzh.ch)
 
 ## Table of Content
 
