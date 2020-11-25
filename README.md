@@ -18,29 +18,26 @@ gregor.rot@uzh.ch
 ### Day 1
 &nbsp; | &nbsp; | &nbsp;
 -------- | --- | --- 
-9.30 - 9.40 | **Welcome & Introduction** | CB&GR
+9.30 - 9.40 | **Welcome & Introduction** | CB & GR
 9.40 - 11:00 | **QC and Mapping** <br /> [Presentation](https://github.com/carlalbc/BIO634_2019/blob/master/Day1_QC_and_mapping/Day1_DataQC_and_BWAmapping.pdf) \| [Hands-on](https://github.com/carlalbc/BIO634_2019/blob/master/Day1_QC_and_mapping/Day1_DataQC_and_mapping.md) | CB
 11:00 - 11.20 | *Coffee break*
-11.20 - 12.30 | **QC and Mapping: Continuation** | CB
+11.20 - 12.30 | **QC and Mapping: Continuation** | CB & GR
 12.30 - 13.30 | *Lunch at the cafeteria*
-13.30 - 15.45 | **Variant Calling 2** <br /> [Presentation](variant_calling/variant_calling_presentation.pdf)  \| [Hands-on](variant_calling/variant_calling_exercises.md) | GR
+13.30 - 15.45 | **Variant Calling 2** <br /> [Presentation](variant_calling/variant_calling_presentation.pdf)  \| [Hands-on](variant_calling/variant_calling_exercises.md) | GR & CB
 15.45 - 16.00 | *Coffee break*
 16.00 - 17.30 | *Talk:* Dr. Jean-Claude Walser (ETH): RNA-seq in ecology and evolutionary biology [pdf](https://github.com/carlalbc/BIO634_2019/blob/master/UniZH_Bio634_JCW_190603.pdf)
-
-
 
 ### Day 2
 &nbsp; | &nbsp; | &nbsp;
 -------- | --- | --- 
 9.30 - 10.45 | **RNA-seq** <br /> [Presentation](https://github.com/carlalbc/BIO634_2019/blob/master/Day2_RNAseq/Day2_RNAseq%20.pdf) \| [Hands-on](https://github.com/carlalbc/BIO634_2019/blob/master/Day2_RNAseq/Day2_RNAseq.md) | CB 
 10.45 - 11:00 | *Coffee break*
-11.00 - 12.00 |  **Continuation: RNA-seq**  | CB
-12.00 - 13.00 | *Lunch at the cafeteria* 
-13:00 - 14:30 |  **Making sense of gene lists** <br /> [Presentation](gene_lists/gene_lists_presentation.pdf)  \| [Hands-on](gene_lists/gene_lists_exercises.md) | GR
-14.30 - 14.50| *Coffee break* |
-14.50 - 15.45 | **Making sense of gene lists: Continuation**  | GR
+11.00 - 12.00 |  **Continuation: RNA-seq**  | CB & GR
+12.00 - 13.30 | *Lunch break* 
+13.30 - 14.30 |  **Continuation: RNA-seq**  | CB & GR
+14.30 - 14.45 | *Coffee break* |
+14:45 - 16:00 |  **Making sense of gene lists** <br /> [Presentation](gene_lists/gene_lists_presentation.pdf)  \| [Hands-on](gene_lists/gene_lists_exercises.md) | GR
 16.00 - 17.30 | **Talk** TBD
-
 
 ## Prerequisites for the course
 
