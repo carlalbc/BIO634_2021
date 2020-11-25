@@ -4,9 +4,10 @@
 
 We will practise the 3 different ways of making sense of a gene list we have discussed in the presentation.
 
-Please clone this repository with:
+Please clone this repository into the storage folder with:
 
 ```
+cd /home/student/storage
 git clone https://github.com/carlalbc/BIO634_2020
 ```
 
