@@ -1,6 +1,6 @@
 # BIO634 - Next generation sequencing (NGS) II. Transcriptomes, Variant Calling and Biological Interpretation
 
-## June 3 - 4th, 2019
+## Dec 3 - 4th, 2020
 ### University of Zürich (UZH) & URPP "Evolution in action"
 
 ![alt text](https://github.com/carlalbc/URPP_tutorials/blob/master/img/Logo_URPP_kl2.png)
@@ -70,6 +70,7 @@ mkdir FastQC
 
 wget http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR617/003/SRR6170103/SRR6170103_1.fastq.gz && wget http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR617/003/SRR6170103/SRR6170103_2.fastq.gz 
 ```
+**Note:** Alternatively, you can find the data already stored in your local Docker folder `data/data_mapping`. You can copy those files to the folder you just created by using: `mv data/data_mapping/*.gz mapping/fastq/SRR6170103`
 
 - Check the FASTQ files:
 
