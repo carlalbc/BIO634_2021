@@ -1,5 +1,5 @@
 # BIO634 - Next generation sequencing (NGS) II. Transcriptomes, Variant Calling and Biological Interpretation
-## June 3-4th 2019 
+## December 3-4th 2020 
 ![alt text](https://github.com/carlalbc/URPP_tutorials/blob/master/img/Logo_URPP_kl2.png)
 ### University of Zürich (UZH) & URPP Evolution in action
 ----------
@@ -102,10 +102,10 @@ do
 done
 cd .. 
 ```
-- Place this commands in a script called `download_reads.sh`. You can use Gedit:
-`gedit download_reads.sh`
-- Copy and paste the contents above, save the file with `Ctrl+S` and Exit with `Alt+F4`
-- To download the data, run the scrip and wait for it to complete:
+- Place this commands in a script called `download_reads.sh`. You can use nano or gedit:
+`nano download_reads.sh`
+- Copy and paste the contents above, save the file with `Ctrl+S` and Exit with `Ctrl+X`
+- To download the data, run the script and wait for it to complete:
 ```
 bash download_reads.sh
 ```
@@ -191,7 +191,7 @@ Now go to the following [link](https://www.bioconductor.org/help/course-material
 ) to where it says *"Locating BAM files and the sample table"* and start from there.
 
 
-### III. Differential analysis: Comparison between DESEq and edgeR
+### III. (((Optional))) Differential expression analysis: Comparison between DESEq and edgeR
 
 
 #### Step 1 and 2: Open **rstudio** by typing ***rstudio*** in the command-line and install the packages like in the previous part.
