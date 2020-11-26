@@ -70,7 +70,7 @@ mkdir FastQC
 
 wget http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR617/003/SRR6170103/SRR6170103_1.fastq.gz && wget http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR617/003/SRR6170103/SRR6170103_2.fastq.gz 
 ```
-**Note:** Alternatively, you can find the data already stored in your local Docker folder `data/data_mapping`. You can copy those files to the folder you just created by using: `mv data/data_mapping/*.gz mapping/fastq/SRR6170103`
+**Note:** Alternatively, you can find the data already stored in your local Docker folder `data/data_mapping`. You can copy those files to the folder you just created by using: `mv data/data_mapping/*.gz mapping/fastq/SRR6170103` then go to the folder `cd mapping/fastq/SRR6170103`.
 
 - Check the FASTQ files:
 
