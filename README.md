@@ -65,10 +65,15 @@ Create a storage folder on your local computer. Then you can start the docker co
 ```
 docker run -v /storage:/home/student/storage --hostname ubuntu --user student --workdir="/home/student" -ti bio634 bash --login
 ```
+In the case above, the local folder is `/storage` (replace with your own local folder), which will be mounted on `/home/student/storage`.
 
-In this case, the local folder is `/storage` (replace with your own local folder), which will be available on `/home/student/storage`.
+If you are using Windows, please put the local folder in quotes, an example would be:
 
-You can now run all exercises in this Docker container.
+```
+docker run -v "C:\Users\username\storage":/home/student/storage --hostname ubuntu --user student --workdir="/home/student" -ti bio634 bash --login
+```
+
+We will run most exercises in this Docker container, which has all required software pre-installed.
 
 ## Recommended books (Practical Computing Skills)
 
