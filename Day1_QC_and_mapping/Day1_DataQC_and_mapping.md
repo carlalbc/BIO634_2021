@@ -24,7 +24,7 @@ You should see a prompt that says:
 
 `student@ubuntu:~$`
 
-If that is correct, then you should be able to go from there! 
+If that is correct, then you should be able to go from there! Now everything you do will be mirrored in the local folder  where you are running Docker from, which would facilitate for you to visualize files later.
 
 ## Part I.- Data Quality Control (QC), pre-processing and mapping genomes 
 
@@ -66,6 +66,9 @@ Let's get started!
 
 
 ```sh
+#Before we start, move to the "storage" folder:
+cd storage
+
 # 1) Make directory called mapping:
 mkdir mapping
 
@@ -84,7 +87,7 @@ mkdir FastQC
 
 #### 2. Download the FASTQ files from ENA - we will work with paired-end (PE) reads from *E. coli*:
 
-- Verify that you are the directory `mapping/fastq/SRR6170103` by using `pwd`. If you are continue with the below commands to download the files that we will work on today.
+- Verify that you are the directory `~/storage/mapping/fastq/SRR6170103` by using `pwd`. If you are continue with the below commands to download the files that we will work on today.
 
 ```sh 
 # Get both FASTQ PE read files from ENA and store it in the subdirectory we just created:
