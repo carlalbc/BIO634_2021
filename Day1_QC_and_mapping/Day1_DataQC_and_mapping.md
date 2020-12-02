@@ -182,7 +182,6 @@ firefox SRR6170103_1_fastqc.html
 Pretty good quality reads! :heavy_check_mark: :octocat:
 
 
-
 - :information_source: Sometimes you can get very **bad** quality reads. See the example below:
 
 ![alt text](https://github.com/carlalbc/BIO694_2018/blob/master/img/fastqc_bad1.png)
@@ -268,10 +267,13 @@ java -jar /usr/share/java/trimmomatic.jar PE -phred33 -threads 1 -trimlog logfil
 :diamond_shape_with_a_dot_inside: If not installed already, download SOAPec
 
 ```sh
+#Go to (if not there):
+cd ~/storage/mapping/fastq/SRR6170103/
 #Make directory
 mkdir software
-# Get SOAPec
+# Get SOAPec & Picard (we will use this one later)
 wget http://sourceforge.net/projects/soapdenovo2/files/ErrorCorrection/SOAPec_v2.01.tar.gz -P software
+wget https://github.com/broadinstitute/picard/releases/download/2.23.8/picard.jar -P software
 # Go to directory
 cd software
 #Untar
@@ -283,25 +285,25 @@ cd ..
 Now we need to create a file with the fastq files location for SOAPec to be able to work. Use your favorite text editor (ie. gedit) and write the path of our fastq files. If you can't remember, use `pwd`.
 
 ```
-gedit files.txt &
+nano files.txt 
 ```
 
-It will open up gedit where you have to write the path of the files that you created in Step 4. 
-In **my** case it will look like this:
+It will open up nano where you have to write the path of the files that you created in Step 4. 
+In this case it should be like this:
 
 ```
-/home/student/mapping/fastq/SRR6170103/SRR6170103_1_trim_paired.fastq
-/home/student/mapping/fastq/SRR6170103/SRR6170103_2_trim_paired.fastq
+~/storage/mapping/fastq/SRR6170103/SRR6170103_1_trim_paired.fastq
+~/storage/mapping/fastq/SRR6170103/SRR6170103_2_trim_paired.fastq
 ```
-- Save the file (Ctrl+S) and exit (Alt+F4). 
+- Save the file (Ctrl+S) and exit (Ctrl+X). 
 - Run the `KmerFreq_AR` command below and when it finishes run the `Corrector_AR` command.
 
 :warning: Depending on **your location** and where you downloaded SOAPEc **the PATH will change**. Remember to use `pwd` to know where you are :warning:
 
 ```
-#Substitute the path below for your own
-/home/student/mapping/fastq/SRR6170103/software/SOAPec_v2.01/bin/KmerFreq_AR -k 16 -t 1 -q 33 -p Error_Corr files.txt > kmerfreq16.log 2> kmerfreq16.err
-/home/student/mapping/fastq/SRR6170103/software/SOAPec_v2.01/bin/Corrector_AR -k 16 -Q 33 -t 1 -o 3 Error_Corr.freq.cz Error_Corr.freq.cz.len files.txt > Corr16.log 2>Corr16.err
+#Always be aware of our PATH
+~/storage/mapping/fastq/SRR6170103/software/SOAPec_v2.01/bin/KmerFreq_AR -k 16 -t 1 -q 33 -p Error_Corr files.txt > kmerfreq16.log 2> kmerfreq16.err
+~/storage/mapping/fastq/SRR6170103/software/SOAPec_v2.01/bin/Corrector_AR -k 16 -Q 33 -t 1 -o 3 Error_Corr.freq.cz Error_Corr.freq.cz.len files.txt > Corr16.log 2>Corr16.err
 ```
 ### :beginner: Questions
 
@@ -343,11 +345,11 @@ NOTE: Exit the fastq folder using `cd ..` until you get to your main directory
 Go to the main folder (we called it mapping) and download the files.
 
 ```
-cd mapping
+cd ~/storage/mapping
 wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna.gz
 wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.gff.gz
 gunzip *
-```
+
 
 ### Step 2: Create indices and dictionaries for bwa, samtools and picard.
 
@@ -367,8 +369,9 @@ databases smaller than 2GB.
 samtools faidx GCF_000005845.2_ASM584v2_genomic.fna
 ```
 - picard index
+
 ```
-java -jar /home/student/APPL/PICARD/picard.2.18.0.jar CreateSequenceDictionary R=GCF_000005845.2_ASM584v2_genomic.fna O=GCF_000005845.2_ASM584v2_genomic.dict
+java -jar ~/storage/software/picard.jar CreateSequenceDictionary R=GCF_000005845.2_ASM584v2_genomic.fna O=GCF_000005845.2_ASM584v2_genomic.dict
 ```
 
 ### Step 3: Align reads to the reference genome using `bwa`
