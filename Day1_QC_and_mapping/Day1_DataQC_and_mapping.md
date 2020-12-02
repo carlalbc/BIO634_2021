@@ -349,6 +349,7 @@ cd ~/storage/mapping
 wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna.gz
 wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.gff.gz
 gunzip *
+```
 
 ### Step 2: Create indices and dictionaries for bwa, samtools and picard.
 
@@ -412,7 +413,7 @@ samtools view -H SRR6170103_sorted.bam
 Picard is a set of command line tools for manipulating high-throughput sequencing (HTS) data and formats such as SAM/BAM/CRAM and VCF. More information can be found [here](https://broadinstitute.github.io/picard/command-line-overview.html#Overview)
 
 ```
-java -jar /home/student/APPL/PICARD/picard.2.18.0.jar MarkDuplicates INPUT=SRR6170103_sorted.bam OUTPUT=SRR6170103_final.bam METRICS_FILE=dupl_metrics.txt
+java -jar ~/storage/software/picard.jar MarkDuplicates INPUT=SRR6170103_sorted.bam OUTPUT=SRR6170103_final.bam METRICS_FILE=dupl_metrics.txt
 ```
 
 Let's do a quick BAMQC by running samtools:
@@ -435,15 +436,15 @@ There are several options to visualize the data on IGV:
 
 1) We can use the java web start version of IGV.
 
-- Follow this link: ​ https://www.broadinstitute.org/software/igv/download
-- Register, and you’ll find the IGV Java Web start.​ ​ Launch IGV with 750 MB.
+- Follow this link:  https://www.broadinstitute.org/software/igv/download
+- Register, and you’ll find the IGV Java Web start. Launch IGV with 750 MB.
 - Load the bam file using *E. coli*'s reference genome.
 
-2) Use the command-line version already installed in the VM
+2) Install IGV on your computer, just follow the instructions on - download your OS version: 
 
-- Open a new tab in the terminal (File | Open Tab)
-- Go to IGV directory with `cd ~/APPL/IGV/IGV_2.4.10/`
-- Launch IGV by typing `./igv.sh` in the terminal
+https://www.broadinstitute.org/software/igv/download
+
+- Launch IGV 
 - Load the fasta file of the genome: File | Load Genome from File...
 - Choose the file for *E. coli*
 - Load the BAM file: File | Load from File...
@@ -452,9 +453,19 @@ There are several options to visualize the data on IGV:
 - Choose the file for *E. coli*
 - You can now navigate the aligned reads, look at genes of interest, coverage, etc.
 
-3) Or run IGV from `/home/YOURNAME/IGV-PATH/IGV`, change `/YOURNAME/IGV-PATH/` with your personal `$PATH`
+2) Use the command-line version:
 
-
+- Open a new tab in the terminal (File | Open Tab)
+- Run IGV from `/home/YOURNAME/IGV-PATH/IGV`, change `/YOURNAME/IGV-PATH/` with your personal `$PATH`-
+- Go to IGV directory with `cd ~/YOURPATH/IGV`
+- Launch IGV by typing `./igv.sh` in the terminal
+- Load the fasta file of the genome: File | Load Genome from File...
+- Choose the file for *E. coli*
+- Load the BAM file: File | Load from File...
+- Choose the BAM file: `SRR6170103_final.bam`
+- Load the genome annotation (gff or bed): File | Load from File...
+- Choose the file for *E. coli*
+- You can now navigate the aligned reads, look at genes of interest, coverage, etc.
 
 # Software Installation (only works on your actual machine, to be skipped on Docker because you don't have sudo rights)
 
