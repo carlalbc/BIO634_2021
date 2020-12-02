@@ -93,8 +93,6 @@ mkdir FastQC
 # Get both FASTQ PE read files from ENA and store it in the subdirectory we just created:
 
 wget http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR617/003/SRR6170103/SRR6170103_1.fastq.gz && wget http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR617/003/SRR6170103/SRR6170103_2.fastq.gz 
-```
-**Note:** Alternatively, you can find the data already stored in your local Docker folder `data/data_mapping`. You can copy those files to the folder you just created by using: `mv data/data_mapping/*.gz mapping/fastq/SRR6170103` then go to the folder `cd mapping/fastq/SRR6170103`.
 
 - Check the FASTQ files:
 
@@ -142,7 +140,7 @@ Usage: fastqc seqfile1 seqfile2 .. seqfileN
 
 - We can do this either by using the graphical user interface of the program (GUI) or through the command-line (recommended). 
  
-##### Graphical User Interface (GUI) - option 1:
+##### Graphical User Interface (GUI) - option 1 (SKIP THIS WITH DOCKER):
 
 ```sh
 #Open the GUI of FastQC by typing fastqc in the command-line (don't forget the ampersand)
@@ -165,16 +163,19 @@ mv *.zip *.html FastQC
 cd FastQC
 ``` 
 
-:information_source: **Reminder:** You can always check where you are in the terminal using `pwd`
+:information_source: **Reminder:** You can always check where you are in the terminal using `pwd` - you should be at `~/storage/mapping/FastQC`
 
 
 #### 2) Open the FastQC results with your favorite html visualizer (i.e firefox, chrome, etc.) or if you prefer it, you can open the file through your GUI by directly clicking on it.
 
+Because we are using Docker, please go to your local "storage" directory in your computer, it should be where you are running your Docker image. It would be named `mapping` click on it and open the .html files with chrome or firefox.
+
+Note: Normally you could just do (skip this if on Docker):
 ```sh 
 firefox SRR6170103_1_fastqc.html
 ```
 
-- You will see the following:
+- Once you manage opening the files, you should be able to see the following:
   
 ![alt text](https://github.com/carlalbc/BIO694_2018/blob/master/img/fastqc_report1.png)
 
