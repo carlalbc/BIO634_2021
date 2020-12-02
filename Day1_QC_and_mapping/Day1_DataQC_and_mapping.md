@@ -5,6 +5,27 @@
 
 ![alt text](https://github.com/carlalbc/URPP_tutorials/blob/master/img/Logo_URPP_kl2.png)
 
+## Docker Initialization:
+
+Before starting run the following to initialize your Ubuntu image on Docker. Plase change the directory to where you have your ubuntu bio634.tar image file.
+
+In the example below you would have to change:
+
+`/home/jupiter/URPP.BIO/BIO634.2020` to your directory of choice depending on your Operative System (OS). Ask us on our Slack dedicated BIO634-students channel if you have any issues.
+
+Example on how to run Docker:
+
+```sh 
+
+docker run -v /home/jupiter/URPP.BIO/BIO634.2020:/home/student/storage --hostname ubuntu --user student --workdir="/home/student" -ti bio634 bash --login
+```
+
+You should see a prompt that says:
+
+`student@ubuntu:~$`
+
+If that is correct, then you should be able to go from there! 
+
 ## Part I.- Data Quality Control (QC), pre-processing and mapping genomes 
 
 Before we get started --remember, Linux is your friend :penguin:
@@ -425,10 +446,11 @@ There are several options to visualize the data on IGV:
 - Choose the file for *E. coli*
 - You can now navigate the aligned reads, look at genes of interest, coverage, etc.
 
-3) Or run IGV from `/home/student/APLL/`
+3) Or run IGV from `/home/YOURNAME/IGV-PATH/IGV`, change `/YOURNAME/IGV-PATH/` with your personal `$PATH`
 
 
-# Software Installation
+
+# Software Installation (only works on your actual machine, to be skipped on Docker because you don't have sudo rights)
 
 ## FastQC
 In case FastQC is not working properly (there is a bug with `sudo apt-get install`):
