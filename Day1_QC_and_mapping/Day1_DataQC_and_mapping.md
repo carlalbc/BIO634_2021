@@ -350,7 +350,6 @@ wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM5
 wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.gff.gz
 gunzip *
 
-
 ### Step 2: Create indices and dictionaries for bwa, samtools and picard.
 
 Indices are necessary for quick access to specific information in very large files.
