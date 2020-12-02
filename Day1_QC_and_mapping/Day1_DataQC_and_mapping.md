@@ -7,7 +7,7 @@
 
 ## Before we start: Docker Initialization:
 
-Before starting run the following to initialize your Ubuntu image on Docker. Plase change the directory to where you have your ubuntu bio634.tar image file.
+Before starting run the following to initialize your Ubuntu image on Docker. Please, note that you should change the directory in the example from below to where you have your ubuntu bio634.tar image file.
 
 In the example below you would have to change:
 
