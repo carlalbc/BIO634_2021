@@ -5,7 +5,7 @@
 
 ![alt text](https://github.com/carlalbc/URPP_tutorials/blob/master/img/Logo_URPP_kl2.png)
 
-## Docker Initialization:
+## Before we start: Docker Initialization:
 
 Before starting run the following to initialize your Ubuntu image on Docker. Plase change the directory to where you have your ubuntu bio634.tar image file.
 
