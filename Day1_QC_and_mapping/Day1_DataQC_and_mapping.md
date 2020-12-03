@@ -377,7 +377,7 @@ samtools faidx GCF_000005845.2_ASM584v2_genomic.fna
 - picard index
 
 ```
-java -jar ~/storage/software/picard.jar CreateSequenceDictionary R=GCF_000005845.2_ASM584v2_genomic.fna O=GCF_000005845.2_ASM584v2_genomic.dict
+java -jar ~/storage/mapping/fastq/SRR6170103/software/picard.jar CreateSequenceDictionary R=GCF_000005845.2_ASM584v2_genomic.fna O=GCF_000005845.2_ASM584v2_genomic.dict
 ```
 
 ### Step 3: Align reads to the reference genome using `bwa`
@@ -419,7 +419,7 @@ samtools view -H SRR6170103_sorted.bam
 Picard is a set of command line tools for manipulating high-throughput sequencing (HTS) data and formats such as SAM/BAM/CRAM and VCF. More information can be found [here](https://broadinstitute.github.io/picard/command-line-overview.html#Overview)
 
 ```
-java -jar ~/storage/software/picard.jar MarkDuplicates INPUT=SRR6170103_sorted.bam OUTPUT=SRR6170103_final.bam METRICS_FILE=dupl_metrics.txt
+java -jar ~/storage/mapping/fastq/SRR6170103/software/picard.jar MarkDuplicates INPUT=SRR6170103_sorted.bam OUTPUT=SRR6170103_final.bam METRICS_FILE=dupl_metrics.txt
 ```
 
 Let's do a quick BAMQC by running samtools:
