@@ -94,6 +94,11 @@ mkdir FastQC
 
 wget http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR617/003/SRR6170103/SRR6170103_1.fastq.gz && wget http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR617/003/SRR6170103/SRR6170103_2.fastq.gz 
 
+#If unresponsive download it from here:
+wget https://bioinfo.evolution.uzh.ch/teaching/SRR6170103_1.fastq.gz
+wget https://bioinfo.evolution.uzh.ch/teaching/SRR6170103_2.fastq.gz
+```
+
 - Check the FASTQ files:
 
 ```sh 
