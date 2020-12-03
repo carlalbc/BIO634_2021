@@ -163,10 +163,10 @@ That will open FastQC and you will be able to open the fastq files directly with
 fastqc SRR6170103_1.fastq.gz SRR6170103_2.fastq.gz      
 
 # Keep it tidy by moving the resulting files to the FastQC folder we created at the beginning
-mv *.zip *.html FastQC         
+mv *.zip *.html ~/storage/mapping/FastQC         
 
 # Go to the FastQC folder
-cd FastQC
+cd ~/storage/mapping/FastQC
 ``` 
 
 :information_source: **Reminder:** You can always check where you are in the terminal using `pwd` - you should be at `~/storage/mapping/FastQC`
