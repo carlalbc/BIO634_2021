@@ -99,6 +99,8 @@ wget http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR617/003/SRR6170103/SRR6170103_1.fast
 ```sh 
 #View the file using the "less" command
 less SRR6170103_1.fastq.gz              # Exit with Ctrl+Z
+#Alternatively use
+zcat SRR6170103_2.fastq.gz | head       #Exit with Ctrl=Z
 ``` 
 - You could use `head`(shows first 10 lines) and see what happens
 - You can also use `tail` to see the las 10 lines at the end of the file.
