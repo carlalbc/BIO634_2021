@@ -128,10 +128,10 @@ salmon quant -i athal_index -l A \
 done 
 ```
 
-- Place this commands in a script called `quant_samples.sh`. You can use Gedit:
-`gedit quant_samples.sh`
-- Copy and paste the contents above, save the file with `Ctrl+S` and Exit with `Alt+F4`
-- To download the data, run the scrip and wait for it to complete:
+- Place this commands in a script called `quant_samples.sh`. You can use nano:
+`nano quant_samples.sh`
+- Copy and paste the contents above, save the file with `Ctrl+S` and Exit with `Ctrl+X`
+- To download the data, run the script and wait for it to complete:
 ```sh
 bash quant_samples.sh
 ```
