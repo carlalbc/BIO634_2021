@@ -174,7 +174,7 @@ cd ~/storage/mapping/FastQC
 
 #### 2) Open the FastQC results with your favorite html visualizer (i.e firefox, chrome, etc.) or if you prefer it, you can open the file through your GUI by directly clicking on it.
 
-Because we are using Docker, please go to your local "storage" directory in your computer, it should be where you are running your Docker image. It would be named `mapping` click on it and open the .html files with chrome or firefox.
+Because we are using Docker, please go to your local "storage" directory in your computer, it should be where you are running your Docker image. It would be named `mapping` click on it and go to the FastQC directory, then open the .html files with chrome or firefox.
 
 Note: Normally you could just do (skip this if on Docker):
 ```sh 
