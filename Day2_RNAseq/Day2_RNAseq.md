@@ -14,7 +14,8 @@ Today we will use **[Salmon](https://combine-lab.github.io/salmon/)** to align a
 
 :information_source: You could also use the STAR aligner, it is particularly good for all genomes where there are no alternatives alleles. For genomes such as hg38 that have alt alleles, hisat2 should be used as it handles the alts correctly and STAR does not yet. Use Tophat2 only if you do not have enough RAM available to run STAR (about 30 GB). The documentation for STAR is available [here](https://github.com/alexdobin/STAR/raw/master/doc/STARmanual.pdf).
 
-### Salmon installation
+### Salmon installation 
+:note: Because you are using a Docker image, you will probably have it already installed so skip this part.
 
 Installation from source: 
 
