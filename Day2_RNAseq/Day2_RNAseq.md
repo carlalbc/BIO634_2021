@@ -15,7 +15,7 @@ Today we will use **[Salmon](https://combine-lab.github.io/salmon/)** to align a
 :information_source: You could also use the STAR aligner, it is particularly good for all genomes where there are no alternatives alleles. For genomes such as hg38 that have alt alleles, hisat2 should be used as it handles the alts correctly and STAR does not yet. Use Tophat2 only if you do not have enough RAM available to run STAR (about 30 GB). The documentation for STAR is available [here](https://github.com/alexdobin/STAR/raw/master/doc/STARmanual.pdf).
 
 ### Salmon installation 
-:note: Because you are using a Docker image, you will probably have it already installed so skip this part.
+:information_source: Because you are using an Ubuntu Docker image, you will probably have Salmon already installed, so skip this part.
 
 Installation from source: 
 
@@ -62,15 +62,15 @@ For this example, we’ll be analyzing some *Arabidopsis thaliana* data, so we�
 
 
 ```sh
-# Make a working directory and go to it
-mkdir salmon
-cd salmon
+# Make a working directory on your ~/storage directory and go to it
+mkdir ~/storage/salmon
+cd ~/storage/salmon
 ```
 
 - Download the transcriptome:
 
 ```sh
-$ curl ftp://ftp.ensemblgenomes.org/pub/plants/release-28/fasta/arabidopsis_thaliana/cdna/Arabidopsis_thaliana.TAIR10.28.cdna.all.fa.gz -o athal.fa.gz
+$ wget ftp://ftp.ensemblgenomes.org/pub/plants/release-28/fasta/arabidopsis_thaliana/cdna/Arabidopsis_thaliana.TAIR10.28.cdna.all.fa.gz -o athal.fa.gz
 ```
 
 Here, we’ve used a reference transcriptome for Arabadopsis. However, one of the benefits of performing quantification directly on the transcriptome (rather than via the host genome), is that one can easily quantify assembled transcripts as well (obtained via software such as StringTie for organisms with a reference or Trinity for de novo RNA-seq experiments).
