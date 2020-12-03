@@ -411,6 +411,11 @@ samtools index SRR6170103_sorted.bam
 samtools view -H SRR6170103_sorted.bam 
 ```
 
+- Create index file for visualization with IGV later
+```
+samtools index SRR6170103_final.bam
+```
+
 ### :beginner: Questions
 
 1. What is the index of the new sorted bam file?
@@ -430,6 +435,7 @@ Let's do a quick BAMQC by running samtools:
 samtools flagstat SRR6170103_sorted.bam > SRR6170103_sorted.flagstat
 samtools flagstat SRR6170103_final.bam > SRR6170103_final.flagstat
 ```
+
 
 ### :beginner: Questions
 
