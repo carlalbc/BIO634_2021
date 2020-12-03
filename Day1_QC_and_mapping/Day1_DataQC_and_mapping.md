@@ -239,6 +239,9 @@ The parameters used for Trimmomatic are defined as follows:
 
 #### a) Trimming PE reads and removing adapters:
 
+- Go to the folder where you have your reads:
+`cd ~/storage/mapping/fastq/SRR6170103`
+- Then run Trimmomatic:
 ```sh
 # Trimming and removing Illumina adapters
 java -jar /usr/share/java/trimmomatic.jar PE -phred33  SRR6170103_1.fastq.gz SRR6170103_2.fastq.gz SRR6170103_1_paired.fastq.gz SRR6170103_1_unpaired.fastq.gz SRR6170103_2_paired.fastq.gz SRR6170103_2_unpaired.fastq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
