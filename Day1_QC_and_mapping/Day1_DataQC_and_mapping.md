@@ -301,8 +301,8 @@ It will open up nano where you have to write the path of the files that you crea
 In this case it should be like this:
 
 ```
-~/storage/mapping/fastq/SRR6170103/SRR6170103_1_trim_paired.fastq
-~/storage/mapping/fastq/SRR6170103/SRR6170103_2_trim_paired.fastq
+/home/student/storage/mapping/fastq/SRR6170103/SRR6170103_1_trim_paired.fastq
+/home/student/storage/mapping/fastq/SRR6170103/SRR6170103_2_trim_paired.fastq
 ```
 - Save the file (Ctrl+S) and exit (Ctrl+X). 
 - Run the `KmerFreq_AR` command below and when it finishes run the `Corrector_AR` command.
