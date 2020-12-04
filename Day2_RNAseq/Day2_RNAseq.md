@@ -156,7 +156,7 @@ To install this package, start R (version "3.6") and enter:
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
-BiocManager::install(c("tximport", "tximportData", "rhdf5"))
+BiocManager::install(c("tximport", "tximportData", "rhdf5", "csaw"))
 ```
 
 - You can change `system.file`, for the `/path/to/dir` (Here we use `system.file` to locate the package directory, but for a typical use, we would just provide a path, e.g. `/path/to/dir`.)
