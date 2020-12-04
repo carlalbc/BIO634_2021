@@ -183,7 +183,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
     BiocManager::install(c(""VennDiagram", "DESeq","edgeR", "Matrix", "airway", "Rsamtools", "pasilla", "GenomicFeatures", "GenomicAlignments","BiocParallel", "Rsubread"))
 ```
-#### Step 2: Open **R**  by typing R on the command line
+#### Step 2: Open **R**  
 
 `$ R`
 
