@@ -183,9 +183,9 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
     BiocManager::install(c(""VennDiagram", "DESeq","edgeR", "Matrix", "airway", "Rsamtools", "pasilla", "GenomicFeatures", "GenomicAlignments","BiocParallel", "Rsubread"))
 ```
-#### Step 2: Open **rstudio** 
+#### Step 2: Open **R**  by typing R on the command line
 
-Type `rstudio`in the command-line, it should open Rstudio.
+`$ R`
 
 Now go to the following [link](https://www.bioconductor.org/help/course-materials/2016/CSAMA/lab-3-rnaseq/rnaseq_gene_CSAMA2016.html
 ) to where it says *"Locating BAM files and the sample table"* and start from there.
