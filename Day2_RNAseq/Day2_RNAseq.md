@@ -178,11 +178,10 @@ You can follow the steps in the [workflow](https://bioconductor.org/packages/rel
 #### Step 1: Install R packages 
 
 ```R
-#Install using sudo in the command line
-sudo R    # use the password for the VM account 
 # Type the following on the R command line
-source("https://bioconductor.org/biocLite.R")
-biocLite(c("VennDiagram", "DESeq","edgeR", "Matrix", "airway", "Rsamtools", "pasilla", "GenomicFeatures", "GenomicAlignments","BiocParallel", "Rsubread"))
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+    BiocManager::install(c(""VennDiagram", "DESeq","edgeR", "Matrix", "airway", "Rsamtools", "pasilla", "GenomicFeatures", "GenomicAlignments","BiocParallel", "Rsubread"))
 ```
 #### Step 2: Open **rstudio** 
 
@@ -205,7 +204,7 @@ Now go to the following [link](https://www.bioconductor.org/help/course-material
 - Start by loading the libraries:
 
 ```
-library(DESeq) 
+library(DESeq2) 
 library(edgeR) 
 library(VennDiagram)
 
