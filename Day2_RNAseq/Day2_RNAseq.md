@@ -181,7 +181,7 @@ You can follow the steps in the [workflow](https://bioconductor.org/packages/rel
 # Type the following on the R command line
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
-    BiocManager::install(c("VennDiagram", "DESeq","edgeR", "Matrix", "airway", "Rsamtools", "pasilla", "GenomicFeatures", "GenomicAlignments","BiocParallel", "Rsubread", "DESeq2"))
+    BiocManager::install(c("VennDiagram","edgeR", "Matrix", "airway", "Rsamtools", "pasilla", "GenomicFeatures", "GenomicAlignments","BiocParallel", "Rsubread", "DESeq2"))
 ```
 #### Step 2: Open **R**  
 
