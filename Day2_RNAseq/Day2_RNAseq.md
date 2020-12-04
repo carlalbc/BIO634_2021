@@ -200,7 +200,7 @@ Now go to the following [link](https://www.bioconductor.org/help/course-material
 - You can always copy&paste, but it is important that you understand what you are doing... go through chunks of the modules instead of everything at once. Each module is separated by a *#* which denotes a "comment" on the script. 
 
 - Install dependencies
-`BiocManager::install(c("DESeq", "edgeR", "VennDiagram"))`
+`BiocManager::install(c("DESeq2", "edgeR", "VennDiagram"))`
 
 - Start by loading the libraries:
 
