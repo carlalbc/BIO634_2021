@@ -312,12 +312,13 @@ We will download only a subset of the original data (to safe disk space and exec
 
 - First create a new folder and download this human sample (The download may take some minutes - in the meanwhile, open a new tab of your terminal and proceed with the next steps). Download the sequence of chromosome 20 and the bam file from Dropbox:
 ```
-wget https://www.dropbox.com/s/rc7rdbm764mm89s/human_example.zip
+wget https://bioinfo.evolution.uzh.ch/share/data/bio634/human_example.zip
 ```
  
 The BAM file was prepared for you like this (you don't have to do it): 
-  ```
-  samtools view -h ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase1/data/HG00154/alignment/HG00154.mapped.ILLUMINA.bwa.GBR.low_coverage.20101123.bam 20:1000000-2000000 > HG00154.low_coverage.chr20.1000000-2000000.sam
+
+```
+samtools view -h ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase1/data/HG00154/alignment/HG00154.mapped.ILLUMINA.bwa.GBR.low_coverage.20101123.bam 20:1000000-2000000 > HG00154.low_coverage.chr20.1000000-2000000.sam
 samtools view -bS HG00154.low_coverage.chr20.1000000-2000000.sam > HG00154.low_coverage.chr20.1000000-2000000.bam
 ```
     
