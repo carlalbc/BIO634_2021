@@ -350,8 +350,6 @@ Here we check how many databases are available for the Arabidopsis genus.
 
 ```
 java -jar snpEff.jar databases | grep Arabidopsis
-Arabidopsis_lyrata Arabidopsis_lyrata ENSEMBL_BFMPP_32_24
-Arabidopsis_thaliana Arabidopsis_thaliana ENSEMBL_BFMPP_32_24
 ```
 
 We see that there are databases available for A. thaliana (both TAIR9 and TAIR10 annotation) and A. lyrata. 
@@ -376,13 +374,13 @@ See the [snpEff documentation](https://pcingola.github.io/SnpEff/se_running/) fo
 ### Exercise: VCFtools
 
 VCFtools are specialized tools for working with VCF files: validating, filtering merging, comparing and calculate some basic population genetic statistics, [see the documentation](http://vcftools.sourceforge.net/docs.html). There are many other tools with similar functionality available for the same purpose.
-￼￼￼￼￼￼
+
 ### Exercise: How many low-coverage regions?
 
 Often some regions of the genome are low coverage only (or even without any aligned reads) consequently we cannot tell whether polymorphisms exist in these regions. We want to identify such regions and find out whether they overlap with genes.
 The bedtools utilities are convenient for working with genomic coordinates for example bedtools allows one to intersect, merge, count, complement, and shuffle genomic intervals from multiple files in widely-used genomic file formats such as BAM, BED, GFF/GTF, VCF. You will find the documentation under http://bedtools.readthedocs.org/en/latest/index.html
 
-Use `MiSeq_Ecoli_DH10B_110721_PF_subsample.bam` from the first exercise.  
+Use `Ecoli_DH10B.bam` from the first exercise.  
 
 - Try to find out how many nucleotides in the *E. coli* genome do not reach a minimal read coverage of 5, 10 or 20 reads (Hint: Use samtools depth, direct the output into a file and then use awk or R to process the file)
 - Do some low coverage nucleotides overlap with annotated genes? (Hint: use the command intersect from bedtools)
@@ -391,7 +389,7 @@ Use `MiSeq_Ecoli_DH10B_110721_PF_subsample.bam` from the first exercise.
 
 #### Solution
 ```
-samtools depth MiSeq_Ecoli_DH10B_110721_PF_subsample.bam | awk 'BEGIN{OFS="\t"} $3<10 {print $1,$2-1,$2}' | bedtools merge -i - | head
+samtools depth Ecoli_DH10B.bam | awk 'BEGIN{OFS="\t"} $3<10 {print $1,$2-1,$2}' | bedtools merge -i - | head
 EcoliDH10B.fa	0	17
 EcoliDH10B.fa	15618	15749
 EcoliDH10B.fa	16379	16496
@@ -462,33 +460,29 @@ Nice! We now have a familiar VCF file.
 #### SNP calling using freebayes with BAM preprocessing (fix mate pairs, mark duplicates)
 
 ```
-#SAMTOOLS=~/software/SAMTOOLS/samtools-1.3
 SAMTOOLS=samtools
-PICARD=~/APPL/PICARD/picard.2.18.0.jar
-FREEBAYES=~/APPL/FREEBAYES/freebayes/bin/freebayes
+PICARD=~/software/picard/picard.2.18.0.jar
+FREEBAYES=~/software/freebayes/freebayes
 
 memory="1G"
 threads=1
 
-cp -p MiSeq_Ecoli_DH10B_110721_PF_subsample.bam Ecoli_DH10B.bam
-
- # sort reads by name required by the next command
+# sort reads by name required by the next command
 $SAMTOOLS sort -n -m $memory -@ $threads -O bam -T /tmp/sort1 -o Ecoli_DH10B-sorted.bam Ecoli_DH10B.bam
 
- # fix mate information and output to bam
+# fix mate information and output to bam
 $SAMTOOLS fixmate -O bam Ecoli_DH10B-sorted.bam Ecoli_DH10B-fixmate.bam
 
- # sort the bam data by position
+# sort the bam data by position
 $SAMTOOLS sort -m $memory -@ $threads -O bam -T /tmp/sort2 -o Ecoli_DH10B-pos-sorted.bam Ecoli_DH10B-fixmate.bam
 
- # mark duplicates
- # Note that we use samtools version 0.1.18 here as this function is not yet implemented in samtools v1.2
-samtools rmdup Ecoli_DH10B-pos-sorted.bam Ecoli_DH10B-fixmate-mdup.bam
- #$SAMTOOLS rmdup Ecoli_DH10B-pos-sorted.bam Ecoli_DH10B-fixmate-mdup.bam
+# mark duplicates
+# Note that we use samtools version 0.1.18 here as this function is not yet implemented in samtools v1.2
+$SAMTOOLS rmdup Ecoli_DH10B-pos-sorted.bam Ecoli_DH10B-fixmate-mdup.bam
 
- # index BAM file$
+# index BAM file$
 $SAMTOOLS index Ecoli_DH10B-fixmate-mdup.bam
 
- # call variants
+# call variants
 $FREEBAYES -f EcoliDH10B.fa -p 1 Ecoli_DH10B-fixmate-mdup.bam > Ecoli_DH10B-fixmate-mdup.vcf
 ```
