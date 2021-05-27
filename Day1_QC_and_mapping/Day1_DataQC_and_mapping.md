@@ -5,26 +5,15 @@
 
 ![alt text](https://github.com/carlalbc/URPP_tutorials/blob/master/img/Logo_URPP_kl2.png)
 
-## Before we start: Docker Initialization:
+## Before we start: Docker setup:
 
-Before starting run the following to initialize your Ubuntu image on Docker. Please, note that you should change the directory in the example from below to where you have your ubuntu bio634.tar image file.
+Please follow instruction on https://github.com/grexor/teachingDocker to initialize your Docker environment.
 
-In the example below you would have to change:
-
-`/home/jupiter/URPP.BIO/BIO634.2020` to your directory of choice depending on your Operative System (OS). Ask us on our Slack dedicated BIO634-students channel if you have any issues.
-
-Example on how to run Docker:
-
-```sh 
-
-docker run -v /home/jupiter/URPP.BIO/BIO634.2020:/home/student/storage --hostname ubuntu --user student --workdir="/home/student" -ti bio634 bash --login
-```
-
-You should see a prompt that says:
+When successful, you should see a prompt:
 
 `student@ubuntu:~$`
 
-If that is correct, then you should be able to go from there! Now everything you do will be mirrored in the local folder  where you are running Docker from, which would facilitate for you to visualize files later.
+Now all files stored in your Docker under `/home/student/data` will be visible on your local computer in the folder you specified when running Docker. This will facilitate visualizing and exploring result files on your computer later on.
 
 ## Part I.- Data Quality Control (QC), pre-processing and mapping genomes 
 
@@ -66,8 +55,8 @@ Let's get started!
 
 
 ```sh
-#Before we start, move to the "storage" folder:
-cd storage
+# Before we start, move to the "data" folder:
+cd data
 
 # 1) Make directory called mapping:
 mkdir mapping
@@ -92,18 +81,16 @@ mkdir FastQC
 ```sh 
 # Get both FASTQ PE read files from ENA and store it in the subdirectory we just created:
 
-wget http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR617/003/SRR6170103/SRR6170103_1.fastq.gz && wget http://ftp.sra.ebi.ac.uk/vol1/fastq/SRR617/003/SRR6170103/SRR6170103_2.fastq.gz 
-
-#If unresponsive download it from here:
-wget https://bioinfo.evolution.uzh.ch/teaching/SRR6170103_1.fastq.gz && wget https://bioinfo.evolution.uzh.ch/teaching/SRR6170103_2.fastq.gz
+wget https://bioinfo.evolution.uzh.ch/share/data/bio634/SRR6170103_1.fastq.gz
+wget https://bioinfo.evolution.uzh.ch/share/data/bio634/SRR6170103_2.fastq.gz
 ```
 
 - Check the FASTQ files:
 
 ```sh 
-#View the file using the "less" command
+# View the file using the "less" command
 less SRR6170103_1.fastq.gz              # Exit with Ctrl+Z
-#Alternatively use
+# Alternatively use
 zcat SRR6170103_2.fastq.gz | head       #Exit with Ctrl=Z
 ``` 
 - You could use `head`(shows first 10 lines) and see what happens
@@ -146,27 +133,16 @@ Usage: fastqc seqfile1 seqfile2 .. seqfileN
 
 - We can do this either by using the graphical user interface of the program (GUI) or through the command-line (recommended). 
  
-##### Graphical User Interface (GUI) - option 1 (SKIP THIS WITH DOCKER):
-
-```sh
-#Open the GUI of FastQC by typing fastqc in the command-line (don't forget the ampersand)
-
-fastqc &
-```
-
-That will open FastQC and you will be able to open the fastq files directly with the program. If you prefer to use the command-line (recommended) do the following:
-
-##### Command-line -  option 2:
-
 ```sh  
-#Run FastQC on both files and wait till it's done running
+
+# Run FastQC on both files and wait till it's done running
 fastqc SRR6170103_1.fastq.gz SRR6170103_2.fastq.gz      
 
 # Keep it tidy by moving the resulting files to the FastQC folder we created at the beginning
-mv *.zip *.html ~/storage/mapping/FastQC         
+mv *.zip *.html ~/data/mapping/fastq/SRR6170103/FastQC
 
 # Go to the FastQC folder
-cd ~/storage/mapping/FastQC
+cd ~/data/mapping/fastq/SRR6170103/FastQC
 ``` 
 
 :information_source: **Reminder:** You can always check where you are in the terminal using `pwd` - you should be at `~/storage/mapping/FastQC`
@@ -174,19 +150,13 @@ cd ~/storage/mapping/FastQC
 
 #### 2) Open the FastQC results with your favorite html visualizer (i.e firefox, chrome, etc.) or if you prefer it, you can open the file through your GUI by directly clicking on it.
 
-Because we are using Docker, please go to your local "storage" directory in your computer, it should be where you are running your Docker image. It would be named `mapping` click on it and go to the FastQC directory, then open the .html files with chrome or firefox.
-
-Note: Normally you could just do (skip this if on Docker):
-```sh 
-firefox SRR6170103_1_fastqc.html
-```
+Because we are using Docker, please go to your local "data" directory on your computer, it should be where you are running your Docker image. It would be named `mapping` click on it and go to the FastQC directory, then open the .html files with chrome or firefox.
 
 - Once you manage opening the files, you should be able to see the following:
   
 ![alt text](https://github.com/carlalbc/BIO694_2018/blob/master/img/fastqc_report1.png)
 
 Pretty good quality reads! :heavy_check_mark: :octocat:
-
 
 - :information_source: Sometimes you can get very **bad** quality reads. See the example below:
 
@@ -244,7 +214,18 @@ The parameters used for Trimmomatic are defined as follows:
 - Then run Trimmomatic:
 ```sh
 # Trimming and removing Illumina adapters
-java -jar /usr/share/java/trimmomatic.jar PE -phred33  SRR6170103_1.fastq.gz SRR6170103_2.fastq.gz SRR6170103_1_paired.fastq.gz SRR6170103_1_unpaired.fastq.gz SRR6170103_2_paired.fastq.gz SRR6170103_2_unpaired.fastq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
+trimmomatic PE -phred33 \
+            SRR6170103_1.fastq.gz \
+            SRR6170103_2.fastq.gz \
+            SRR6170103_1_paired.fastq.gz \
+            SRR6170103_1_unpaired.fastq.gz \
+            SRR6170103_2_paired.fastq.gz \
+            SRR6170103_2_unpaired.fastq.gz \
+            ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 \
+            LEADING:3 \
+            TRAILING:3 \
+            SLIDINGWINDOW:4:15 \
+            MINLEN:36
 ```
 
 ### :beginner: Questions: 
@@ -260,8 +241,19 @@ java -jar /usr/share/java/trimmomatic.jar PE -phred33  SRR6170103_1.fastq.gz SRR
 Next, we can remove low quality reads of the sequences by trimming the bases at the 3' end of the reads with the following command:
 
 ```sh
-#Filtering low quality reads
-java -jar /usr/share/java/trimmomatic.jar PE -phred33 -threads 1 -trimlog logfile2 SRR6170103_1_paired.fastq.gz SRR6170103_2_paired.fastq.gz SRR6170103_1_trim_paired.fastq SRR6170103_1_unpaired.fastq SRR6170103_2_trim_paired.fastq SRR6170103_2_trim_unpaired.fastq SLIDINGWINDOW:4:15 LEADING:3 TRAILING:3 MINLEN:36
+# Download Illumina adapters
+wget https://raw.githubusercontent.com/timflutre/trimmomatic/master/adapters/TruSeq3-PE.fa
+
+# Filtering low quality reads
+trimmomatic PE -phred33 -threads 1 -trimlog logfile2 SRR6170103_1_paired.fastq.gz \
+            SRR6170103_2_paired.fastq.gz \
+            SRR6170103_1_trim_paired.fastq \
+            SRR6170103_1_unpaired.fastq \
+            SRR6170103_2_trim_paired.fastq \
+            SRR6170103_2_trim_unpaired.fastq \
+            SLIDINGWINDOW:4:15 LEADING:3 \
+            TRAILING:3 \
+            MINLEN:36
 ```
 
 ### :beginner: Questions:
@@ -276,9 +268,9 @@ java -jar /usr/share/java/trimmomatic.jar PE -phred33 -threads 1 -trimlog logfil
 :diamond_shape_with_a_dot_inside: If not installed already, download SOAPec
 
 ```sh
-#Go to (if not there):
-cd ~/storage/mapping/fastq/SRR6170103/
-#Make directory
+# Go to (if not there):
+cd ~/data/mapping/fastq/SRR6170103/
+# Make directory
 mkdir software
 # Get SOAPec & Picard (we will use this one later)
 wget http://sourceforge.net/projects/soapdenovo2/files/ErrorCorrection/SOAPec_v2.01.tar.gz -P software
@@ -354,7 +346,7 @@ NOTE: Exit the fastq folder using `cd ..` until you get to your main directory
 Go to the main folder (we called it mapping) and download the files.
 
 ```
-cd ~/storage/mapping
+cd ~/data/mapping
 wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna.gz
 wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.gff.gz
 gunzip *
@@ -531,6 +523,3 @@ trim_galore --help #see help
 trim_galore --paired --nextera SRR6170103_1_trim_paired.fastq SRR6170103_2_trim_paired.fastq
 ```
 :information_source: There is currently a bug, so we will omit this step.
-
-
-
