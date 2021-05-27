@@ -54,26 +54,7 @@ Carla Bello (carla.bello@ieu.uzh.ch) & Gregor Rot (gregor.rot@uzh.ch)
 
 ## Installation Instructions for Docker
 
-Install [Docker](https://www.docker.com/). Download the [bio634.tar](https://bioinfo.evolution.uzh.ch/teaching/bio634.tar) file. Load the Docker image to the file:
-
-```
-docker load -i bio634.tar
-```
-
-Create a storage folder on your local computer. Then you can start the docker container by running:
-
-```
-docker run -v /storage:/home/student/storage --hostname ubuntu --user student --workdir="/home/student" -ti bio634 bash --login
-```
-In the case above, the local folder is `/storage` (replace with your own local folder), which will be mounted on `/home/student/storage`.
-
-If you are using Windows, please put the local folder in quotes, an example would be:
-
-```
-docker run -v "C:\Users\username\storage":/home/student/storage --hostname ubuntu --user student --workdir="/home/student" -ti bio634 bash --login
-```
-
-We will run most exercises in this Docker container, which has all required software pre-installed.
+Please follow the instruction on https://github.com/grexor/teachingDocker to install and setup the Docker environment we will use during this class.
 
 ## Recommended books (Practical Computing Skills)
 
