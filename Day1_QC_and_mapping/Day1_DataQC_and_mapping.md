@@ -35,7 +35,7 @@ rmdir   | remove directory
 wget    |          download files from the web  
 
 
-## I) Quality Assesment: Pre-processing of the reads
+## Quality Assesment: Pre-processing of the reads
 
 We will be working with data from the [Lenski lab](http://myxo.css.msu.edu/ecoli/genomicsdat.html) and Desai. They are known for making long-term evolution experiments in *E. coli* since the early 00’s. The strain we will work with today is an *E. coli* from a long-term evolution experiment (LTEE). The twelve LTEE populations have been serially propagated
 in the same medium for more than 60,000 generations, with samples preserved every 500 generations.  
