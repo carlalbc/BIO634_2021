@@ -14,7 +14,7 @@ Carla Bello (carla.bello@ieu.uzh.ch) & Gregor Rot (gregor.rot@uzh.ch)
 &nbsp; | &nbsp; | &nbsp;
 -------- | --- | --- 
 9.30 - 9.40 | **Welcome & Introduction** | CB & GR
-9.40 - 10:45 | **QC and Mapping** <br /> [Presentation](https://github.com/carlalbc/BIO634_2021/blob/grexor/Day1_QC_and_mapping/BIO634_Day1_DataQC_and_BWAmapping.pdf) \| [Hands-on](https://github.com/carlalbc/BIO634_2021/blob/grexor/Day1_QC_and_mapping/Day1_DataQC_and_mapping.md) | CB
+9.40 - 10:45 | **QC and Mapping** <br /> [Presentation](Day1_QC_and_mapping/BIO634_Day1_DataQC_and_BWAmapping.pdf) \| [Hands-on](Day1_QC_and_mapping/Day1_DataQC_and_mapping.md) | CB
 10:45 - 11.00 | *Coffee break*
 11.00 - 12.00 | **QC and Mapping: Continuation** | CB & GR
 12.00 - 13.30 | *Lunch break*
