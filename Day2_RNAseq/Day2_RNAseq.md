@@ -15,7 +15,8 @@ Today we will use **[Salmon](https://combine-lab.github.io/salmon/)** to align a
 
 :information_source: You could also use the STAR aligner, it is particularly good for all genomes where there are no alternatives alleles. For genomes such as hg38 that have alt alleles, hisat2 should be used as it handles the alts correctly and STAR does not yet. Use Tophat2 only if you do not have enough RAM available to run STAR (about 30 GB). The documentation for STAR is available [here](https://github.com/alexdobin/STAR/raw/master/doc/STARmanual.pdf).
 
-### a) Obtaining a transcriptome and building and index 
+### a) Obtaining the transcriptome and building the index 
+
 In order to quantify transcript-level abundances, Salmon requires a target transcriptome. 
 
 This transcriptome is given to Salmon in the form of a (possibly compressed) multi-FASTA file, with each entry providing the sequence of a transcript. 
@@ -23,17 +24,16 @@ This transcriptome is given to Salmon in the form of a (possibly compressed) mul
 For this example, we’ll be analyzing some *Arabidopsis thaliana* data, so we’ll download and index the *A. thaliana* transcriptome. 
 - First, create a directory where we’ll do our analysis, let’s call it `salmon`: 
 
-
 ```sh
 # Make a working directory on your ~/storage directory and go to it
-mkdir ~/storage/salmon
-cd ~/storage/salmon
+mkdir ~/data/salmon
+cd ~/data/salmon
 ```
 
 - Download the transcriptome:
 
 ```sh
-$ wget ftp://ftp.ensemblgenomes.org/pub/plants/release-28/fasta/arabidopsis_thaliana/cdna/Arabidopsis_thaliana.TAIR10.28.cdna.all.fa.gz -o athal.fa.gz
+wget ftp://ftp.ensemblgenomes.org/pub/plants/release-28/fasta/arabidopsis_thaliana/cdna/Arabidopsis_thaliana.TAIR10.28.cdna.all.fa.gz -o athal.fa.gz
 ```
 
 Here, we’ve used a reference transcriptome for Arabadopsis. However, one of the benefits of performing quantification directly on the transcriptome (rather than via the host genome), is that one can easily quantify assembled transcripts as well (obtained via software such as StringTie for organisms with a reference or Trinity for de novo RNA-seq experiments).
@@ -41,7 +41,6 @@ Here, we’ve used a reference transcriptome for Arabadopsis. However, one of th
 Next, we’re going to build an index on our transcriptome. The index is a structure that salmon uses to quasi-map RNA-seq reads during quantification. The index need only be constructed once per transcriptome, and it can then be reused to quantify many experiments. 
 
 - Now we use the index command of salmon to build our index:
-
 
 ```
 salmon index -t athal.fa.gz -i athal_index
@@ -54,14 +53,14 @@ In addition to the index, salmon obviously requires the RNA-seq reads from the e
 
 ```sh
 #!/bin/bash
-mkdir data
-cd data
+mkdir RNAseq
+cd RNAseq
 for i in `seq 25 28`; 
 do 
   mkdir DRR0161${i}; 
   cd DRR0161${i}; 
-  wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/DRR016/DRR0161${i}/DRR0161${i}_1.fastq.gz; 
-  wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/DRR016/DRR0161${i}/DRR0161${i}_2.fastq.gz; 
+  wget https://bioinfo.evolution.uzh.ch/share/data/bio634/RNAseq/DRR0161${i}/DRR0161${i}_1.fastq.gz; 
+  wget https://bioinfo.evolution.uzh.ch/share/data/bio634/RNAseq/DRR0161${i}/DRR0161${i}_2.fastq.gz; 
   cd ..; 
 done
 cd .. 
@@ -80,7 +79,7 @@ Now that we have our index built and all of our data downloaded, we’re ready t
 
 ```sh
 #!/bin/bash
-for fn in data/DRR0161{25..28};
+for fn in RNAseq/DRR0161{25..28};
 do
 samp=`basename ${fn}`
 echo "Processing sample ${samp}"
