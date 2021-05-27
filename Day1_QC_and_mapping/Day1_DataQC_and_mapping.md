@@ -89,9 +89,10 @@ wget https://bioinfo.evolution.uzh.ch/share/data/bio634/SRR6170103_2.fastq.gz
 
 ```sh 
 # View the file using the "less" command
-less SRR6170103_1.fastq.gz              # Exit with Ctrl+Z
+less SRR6170103_1.fastq.gz            # Exit with Ctrl+Z
+
 # Alternatively use
-zcat SRR6170103_2.fastq.gz | head       #Exit with Ctrl=Z
+zcat SRR6170103_2.fastq.gz | head     # Exit with Ctrl+Z
 ``` 
 - You could use `head`(shows first 10 lines) and see what happens
 - You can also use `tail` to see the las 10 lines at the end of the file.
@@ -281,10 +282,9 @@ In this case it should be like this:
 - Save the file (Ctrl+S) and exit (Ctrl+X). 
 - Run the `KmerFreq_AR` command below and when it finishes run the `Corrector_AR` command.
 
-:warning: Depending on **your location** and where you downloaded SOAPEc **the PATH will change**. Remember to use `pwd` to know where you are :warning:
-
 ```
-#Always be aware of our PATH
+# Always be aware of our PATH
+
 KmerFreq_AR -k 16 -t 1 -q 33 -p Error_Corr files.txt > kmerfreq16.log 2> kmerfreq16.err
 Corrector_AR -k 16 -Q 33 -t 1 -o 3 Error_Corr.freq.cz Error_Corr.freq.cz.len files.txt > Corr16.log 2>Corr16.err
 ```
@@ -311,11 +311,9 @@ ________________________________________________________________________________
 
 **If you closed FastQC before, open it and run it for the trimmed paired-end reads, do they look very different?**
 
-
-Congratulations you now can continue with the next step of our workflow! :octocat:
+Congratulations, you now can continue with the next step of our workflow! :octocat:
 
 NOTE: Exit the fastq folder using `cd ..` until you get to your main directory
-
 
 ## Part II: Mapping sequencing reads to a reference genome using the Burrows-Wheeler Aligner (BWA) tool
 
@@ -344,13 +342,14 @@ As you go creating the indices check for the files with `ls`
 ```
 bwa index -a is GCF_000005845.2_ASM584v2_genomic.fna
 ```
-`-a is` Sets the algorithm to be used to construct a suffix array. This is suitable for
-databases smaller than 2GB.
+`-a is` Sets the algorithm to be used to construct a suffix array. This is suitable for databases smaller than 2GB.
 
 - samtools index
+
 ```
 samtools faidx GCF_000005845.2_ASM584v2_genomic.fna
 ```
+
 - picard index
 
 ```
@@ -363,11 +362,11 @@ java -jar ~/software/picard.jar CreateSequenceDictionary R=GCF_000005845.2_ASM58
 bwa mem GCF_000005845.2_ASM584v2_genomic.fna fastq/SRR6170103/SRR6170103_1_trim_paired.fastq fastq/SRR6170103/SRR6170103_2_trim_paired.fastq > SRR6170103.sam
 ```
 
-See bwa manual [here](http://bio-bwa.sourceforge.net/bwa.shtml) for more options.
+See [bwa manual](http://bio-bwa.sourceforge.net/bwa.shtml) for more options.
 
 - Convert the new sam file to bam format (bam is a binary version of the sam format):
 ```
-samtools view -Sb SRR6170103.sam > SRR6170103.bam #depending on version of samtools
+samtools view -Sb SRR6170103.sam > SRR6170103.bam
 ```
 - Sort the bam file
 ```
@@ -452,53 +451,3 @@ https://www.broadinstitute.org/software/igv/download
 - Load the genome annotation (gff or bed): File | Load from File...
 - Choose the file for *E. coli*
 - You can now navigate the aligned reads, look at genes of interest, coverage, etc.
-
-# Software Installation (only works on your actual machine, to be skipped on Docker because you don't have sudo rights)
-
-## FastQC
-In case FastQC is not working properly (there is a bug with `sudo apt-get install`):
-
-```sh
-# Make a software directory
-mkdir ~/software
-# Go to software directory
-cd ~/software
-# Get FastQC
-wget https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.8.zip
-# Unzip it
-unzip fastqc_v0.11.8.zip
-#Go to folder
-cd FastQC
-# Change mode to executable
-chmod 755 fastqc
-# Export path to make it available from anywhere 
-export PATH=$PATH:~/software/FastQC/
-# Update your bashrc
-source ~/.bashrc
-``` 
-
-## Trim galore and cutadapt
-For Nextera adapters, it seems Trimmomatic is not good to remove them.
-
-```sh
-# Install cutadapt
-sudo apt install python-cutadapt
-# Make software directory (omit if exists)
-mkdir ~/software
-# Go to your software directory
-cd ~/software
-# Get Trim galore
-wget https://github.com/FelixKrueger/TrimGalore/archive/0.6.1.zip
-# Export path of trim galore
-export PATH=$PATH:~/software/TrimGalore-0.6.1/trim_galore
-# Update your bashrc
-source ~/.bashrc
-```
-Run Trimgalore: (there is a current bug)
-
-```sh
-trim_galore --help #see help
-# Run it
-trim_galore --paired --nextera SRR6170103_1_trim_paired.fastq SRR6170103_2_trim_paired.fastq
-```
-:information_source: There is currently a bug, so we will omit this step.

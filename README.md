@@ -14,18 +14,18 @@ Carla Bello (carla.bello@ieu.uzh.ch) & Gregor Rot (gregor.rot@uzh.ch)
 &nbsp; | &nbsp; | &nbsp;
 -------- | --- | --- 
 9.30 - 9.40 | **Welcome & Introduction** | CB & GR
-9.40 - 10:45 | **QC and Mapping** <br /> [Presentation](https://github.com/carlalbc/BIO634_2021/blob/master/Day1_QC_and_mapping/BIO634_Day1_DataQC_and_BWAmapping.pdf) \| [Hands-on](https://github.com/carlalbc/BIO634_2021/blob/master/Day1_QC_and_mapping/Day1_DataQC_and_mapping.md) | CB
+9.40 - 10:45 | **QC and Mapping** <br /> [Presentation](Day1_QC_and_mapping/BIO634_Day1_DataQC_and_BWAmapping.pdf) \| [Hands-on](Day1_QC_and_mapping/Day1_DataQC_and_mapping.md) | CB
 10:45 - 11.00 | *Coffee break*
 11.00 - 12.00 | **QC and Mapping: Continuation** | CB & GR
 12.00 - 13.30 | *Lunch break*
 13.30 - 14.30 | **Variant Calling 2** <br /> [Presentation](variant_calling/variant_calling_presentation.pdf)  \| [Hands-on](variant_calling/variant_calling_exercises.md) | GR & CB
 14.30 - 14.45 | *Coffee break*
-14.45 - 16.00 | *Talk:* Dr. Jean-Claude Walser (ETH): <br /> RNA-seq in ecology and evolutionary biology [pdf](https://github.com/carlalbc/BIO634_2021/blob/master/UniZH_Bio634_JCW_190603.pdf) -CANCELLED-
+14.45 - 16.00 | *Talk:* Dr. Jean-Claude Walser (ETH): <br /> RNA-seq in ecology and evolutionary biology [pdf](UniZH_Bio634_JCW_190603.pdf) -CANCELLED-
 
 ### Day 2
 &nbsp; | &nbsp; | &nbsp;
 -------- | --- | --- 
-9.30 - 10.45 | **RNA-seq** <br /> [Presentation](https://github.com/carlalbc/BIO634_2021/blob/master/Day2_RNAseq/BIO634_Day2_RNAseq.pdf) \| [Hands-on](https://github.com/carlalbc/BIO634_2021/blob/master/Day2_RNAseq/Day2_RNAseq.md) | CB 
+9.30 - 10.45 | **RNA-seq** <br /> [Presentation](Day2_RNAseq/BIO634_Day2_RNAseq.pdf) \| [Hands-on](Day2_RNAseq/Day2_RNAseq.md) | CB 
 10.45 - 11:00 | *Coffee break*
 11.00 - 12.00 |  **Continuation: RNA-seq**  | CB & GR
 12.00 - 13.30 | *Lunch break* 
