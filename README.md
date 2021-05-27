@@ -3,8 +3,7 @@
 ## June 3-4th 2021
 
 
-### University of Zurich
-### URPP Evolution in Action
+### University of Zurich, URPP Evolution in Action
 ![URPP logo](Logo_URPP_kl2.png)
 
 Carla Bello (carla.bello@ieu.uzh.ch) & Gregor Rot (gregor.rot@uzh.ch)
@@ -37,20 +36,7 @@ Carla Bello (carla.bello@ieu.uzh.ch) & Gregor Rot (gregor.rot@uzh.ch)
 ## Prerequisites for the course
 
 - Basic command line 
-- Basic knowledge about NGS data structure: reads, alignments (BAM), quality scores or attendance of 'BIO609 Introduction to Linux and Bash Scripting' and `BIO610 Next-Generation Sequencing 1 – Introductory Course: Assembly, Mapping, and Variant Calling`
-
-## Directory structure
-
-```
-(Unix System hierarchical tree)
-
-/home/student
-            /software
-            /variantcalling2
-            /rnaseq
-            /data
-                /data_ngs2
-```
+- Basic knowledge about NGS data structure: reads, alignments (BAM), quality scores or attendance of "BIO609 Introduction to Linux and Bash Scripting" and "BIO610 Next-Generation Sequencing 1"
 
 ## Installation Instructions for Docker
 
