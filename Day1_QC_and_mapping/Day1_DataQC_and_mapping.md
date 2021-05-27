@@ -265,24 +265,6 @@ trimmomatic PE -phred33 -threads 1 -trimlog logfile2 SRR6170103_1_paired.fastq.g
 
 [SOAPec](https://omictools.com/soapec-tool) is a tool is a read correction tool specifically designed for illumina short reads, the manual can be found [here](http://soap.genomics.org.cn/about.html). The command below will take the trimmed fastq files generated in step 4 and correct sequencing errors in a two step process using tools called KmerFreq_AR and Corrector_AR.
 
-:diamond_shape_with_a_dot_inside: If not installed already, download SOAPec
-
-```sh
-# Go to (if not there):
-cd ~/data/mapping/fastq/SRR6170103/
-# Make directory
-mkdir software
-# Get SOAPec & Picard (we will use this one later)
-wget http://sourceforge.net/projects/soapdenovo2/files/ErrorCorrection/SOAPec_v2.01.tar.gz -P software
-wget https://github.com/broadinstitute/picard/releases/download/2.23.8/picard.jar -P software
-# Go to directory
-cd software
-#Untar
-tar -zxf SOAPec_v2.01.tar.gz
-#Get out of folder
-cd ..
-```
-
 Now we need to create a file with the fastq files location for SOAPec to be able to work. Use your favorite text editor (ie. gedit) and write the path of our fastq files. If you can't remember, use `pwd`.
 
 ```
