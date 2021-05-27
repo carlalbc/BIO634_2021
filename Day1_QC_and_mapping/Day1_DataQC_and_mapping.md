@@ -293,8 +293,8 @@ It will open up nano where you have to write the path of the files that you crea
 In this case it should be like this:
 
 ```
-/home/student/storage/mapping/fastq/SRR6170103/SRR6170103_1_trim_paired.fastq
-/home/student/storage/mapping/fastq/SRR6170103/SRR6170103_2_trim_paired.fastq
+/home/student/data/mapping/fastq/SRR6170103/SRR6170103_1_trim_paired.fastq
+/home/student/data/mapping/fastq/SRR6170103/SRR6170103_2_trim_paired.fastq
 ```
 - Save the file (Ctrl+S) and exit (Ctrl+X). 
 - Run the `KmerFreq_AR` command below and when it finishes run the `Corrector_AR` command.
@@ -303,8 +303,8 @@ In this case it should be like this:
 
 ```
 #Always be aware of our PATH
-~/storage/mapping/fastq/SRR6170103/software/SOAPec_v2.01/bin/KmerFreq_AR -k 16 -t 1 -q 33 -p Error_Corr files.txt > kmerfreq16.log 2> kmerfreq16.err
-~/storage/mapping/fastq/SRR6170103/software/SOAPec_v2.01/bin/Corrector_AR -k 16 -Q 33 -t 1 -o 3 Error_Corr.freq.cz Error_Corr.freq.cz.len files.txt > Corr16.log 2>Corr16.err
+KmerFreq_AR -k 16 -t 1 -q 33 -p Error_Corr files.txt > kmerfreq16.log 2> kmerfreq16.err
+Corrector_AR -k 16 -Q 33 -t 1 -o 3 Error_Corr.freq.cz Error_Corr.freq.cz.len files.txt > Corr16.log 2>Corr16.err
 ```
 ### :beginner: Questions
 
@@ -347,8 +347,8 @@ Go to the main folder (we called it mapping) and download the files.
 
 ```
 cd ~/data/mapping
-wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna.gz
-wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/005/845/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.gff.gz
+wget https://bioinfo.evolution.uzh.ch/share/data/bio634/GCF_000005845.2_ASM584v2_genomic.fna.gz
+wget https://bioinfo.evolution.uzh.ch/share/data/bio634/GCF_000005845.2_ASM584v2_genomic.gff.gz
 gunzip *
 ```
 
@@ -372,7 +372,7 @@ samtools faidx GCF_000005845.2_ASM584v2_genomic.fna
 - picard index
 
 ```
-java -jar ~/storage/mapping/fastq/SRR6170103/software/picard.jar CreateSequenceDictionary R=GCF_000005845.2_ASM584v2_genomic.fna O=GCF_000005845.2_ASM584v2_genomic.dict
+java -jar ~/software/picard.jar CreateSequenceDictionary R=GCF_000005845.2_ASM584v2_genomic.fna O=GCF_000005845.2_ASM584v2_genomic.dict
 ```
 
 ### Step 3: Align reads to the reference genome using `bwa`
@@ -385,13 +385,11 @@ See bwa manual [here](http://bio-bwa.sourceforge.net/bwa.shtml) for more options
 
 - Convert the new sam file to bam format (bam is a binary version of the sam format):
 ```
-samtools view -b SRR6170103.sam -o SRR6170103.bam #depending on version of samtools
-
 samtools view -Sb SRR6170103.sam > SRR6170103.bam #depending on version of samtools
 ```
 - Sort the bam file
 ```
-samtools sort SRR6170103.bam -o SRR6170103_sorted.bam
+samtools sort SRR6170103.bam SRR6170103_sorted
 ```
 - Index the sorted bam for fast access
 ```
@@ -405,7 +403,7 @@ samtools view -H SRR6170103_sorted.bam
 
 - Create index file for visualization with IGV later
 ```
-samtools index SRR6170103_final.bam
+samtools index SRR6170103_sorted.bam
 ```
 
 ### :beginner: Questions
@@ -419,7 +417,7 @@ samtools index SRR6170103_final.bam
 Picard is a set of command line tools for manipulating high-throughput sequencing (HTS) data and formats such as SAM/BAM/CRAM and VCF. More information can be found [here](https://broadinstitute.github.io/picard/command-line-overview.html#Overview)
 
 ```
-java -jar ~/storage/mapping/fastq/SRR6170103/software/picard.jar MarkDuplicates INPUT=SRR6170103_sorted.bam OUTPUT=SRR6170103_final.bam METRICS_FILE=dupl_metrics.txt
+java -jar ~/software/picard.jar MarkDuplicates INPUT=SRR6170103_sorted.bam OUTPUT=SRR6170103_final.bam METRICS_FILE=dupl_metrics.txt
 ```
 
 Let's do a quick BAMQC by running samtools:
@@ -427,7 +425,6 @@ Let's do a quick BAMQC by running samtools:
 samtools flagstat SRR6170103_sorted.bam > SRR6170103_sorted.flagstat
 samtools flagstat SRR6170103_final.bam > SRR6170103_final.flagstat
 ```
-
 
 ### :beginner: Questions
 
