@@ -69,10 +69,8 @@ In our sample we observe very few anomalous read pairs, so we will skip for now 
 We remove duplicate reads using samtools:
 ```
 samtools rmdup Ecoli_DH10B.bam Ecoli_DH10B-rmdup.bam
-# [bam_rmdup_core] 1200 / 650578 = 0.0018 in library
 ```
-Our file only contains 0.18% of duplicate reads.
-(We could also just mark duplicate reads using Picard tools, reads marked as duplicates in the BAM file will then be ignored by freebayes).
+Our file only contains 0.18% of duplicate reads (we could also just mark duplicate reads using Picard tools, reads marked as duplicates in the BAM file will then be ignored by freebayes).
 
 That's it, now we have an analysis-ready BAM.
 
