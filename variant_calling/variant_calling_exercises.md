@@ -27,7 +27,7 @@ The approaches presented here work for Illumina data.
 
 The data is already stored on the Docker instance at:
 ```
-/home/student/data/data_ngs2
+/home/student/materials
 ```
 
 ## SNP Calling using FreeBayes
@@ -43,6 +43,15 @@ FreeBayes expects a cleaned BAM file as input with marked duplicates. It calls v
 How we can get information about freebayes options:
 ```
 freebayes --help
+```
+
+We will work in the `/home/student/data` folder. Let's copy the required files from the materials to the data folder:
+
+```
+cd /home/student/data
+cp /home/student/materials/*.bam .
+cp /home/student/materials/*fa .
+cp /home/student/materials/*gff .
 ```
 
 The reads were already mapped to the *E.coli* DH10B genome, you will find a BAM file `MiSeq_Ecoli_DH10B_110721_PF_subsample.bam`. Let us rename the file to `Ecoli_DH10B.bam` to save typing:
@@ -65,16 +74,13 @@ samtools rmdup Ecoli_DH10B.bam Ecoli_DH10B-rmdup.bam
 Our file only contains 0.18% of duplicate reads.
 (We could also just mark duplicate reads using Picard tools, reads marked as duplicates in the BAM file will then be ignored by freebayes).
 
-
 That's it, now we have an analysis-ready BAM.
-
 
 As always we have to index the BAM file:
 ```
 samtools index Ecoli_DH10B-rmdup.bam
 ```
 The index command creates an additional file allowing faster access. BAM index files are required for the next command.
-
 
 Now we can run an analysis without any parameter optimization just setting the ploidy to 1 (this will take a few minutes):
 ```
@@ -86,7 +92,8 @@ freebayes -p 1 -f EcoliDH10B.fa Ecoli_DH10B-rmdup.bam > Ecoli_DH10B-rmdup.vcf
 Many downstream applications only work with compressed & indexed vcf files using `bgzip` and `tabix` allowing fast access.
 
 ```
-bgzip -c Ecoli_DH10B-rmdup.vcf > Ecoli_DH10B-rmdup.vcf.gz   # makes Ecoli_DH10B-rmdup.vcf.gz
+# makes Ecoli_DH10B-rmdup.vcf.gz
+bgzip -c Ecoli_DH10B-rmdup.vcf > Ecoli_DH10B-rmdup.vcf.gz
 tabix -p vcf Ecoli_DH10B-rmdup.vcf.gz
 ```
 As we have to do this for each vcf file, we write a script that does the job. Save the script below as `indexVCF.sh` and make it executable. It sorts, compresses and indexes a vcf file by doing: `./indexVCF.sh Ecoli_DH10B-rmdup.vcf` 
@@ -133,7 +140,6 @@ Of primary interest to most users is the QUAL field, which estimates the probabi
 - Sort the records according to quality and check some proposed variants using the IGV genome browser. Hint: you can sort the vcf file using `zgrep -v "#" File.vcf.gz | sort -k6,6gr | head`  
 - Check what are the options of FreeBayes. Use the FreeBayes manual (https://github.com/ekg/freebayes) to explore and change parameters. Important parameters are `--min-mapping-quality` and `--min-base-quality`. How do different parameters influence your results?
 
-
 ### Filtering variants
 
 With any variant caller you use, there will be an inherent trade-off between sensitivity and specificity. Typically, you would carry forward as much data as practical at each processing step, deferring final judgement until later so you have more information. For example, you might not want to exclude low coverage regions in one sample from your raw data because you may be able to infer a genotype based on family information later.
@@ -150,12 +156,6 @@ All but 1 variant have been filtered out as low-quality.
 ### Visualize the aligned reads
 
 Seeing is believing! One should always have a look at the data to get a feeling about the error rate, coverage heterogeneity, ...  
-
-First, copy the generated files to the `storage` folder, like so:
-
-```cp -ap /home/student/data/data_ngs2 /home/student/storage```
-
-In this way, you can explore the files on your computer.
 
 Go to the Integrative Genome Viewer (IGV) website http://www.broadinstitute.org/igv/ and Download and Install the IGV browser locally on your computer.
 
@@ -186,7 +186,6 @@ In contrast, for GATK it is recommended to use all 3 BAM preprocessing steps. Le
 
 
 ### GATK
-
 
 - GATK is powerful, but it requires relatively complex pipelines 
 - GATK has been developed for human data and they provide files with known SNPs, indels etc. only for human. Some of the preprocessing steps can not be run for other organisms.
@@ -336,8 +335,6 @@ bcftools filter -O z -o VCF.vcf-filtered.gz -i'%QUAL>10' VCF.vcf.gz
 vt peek VCF.vcf-filtered.gz
 ``` 
 - Check some variants in IGV
-
-
 
 ## Variant Annotation using SnpEff & SnpSift
 
