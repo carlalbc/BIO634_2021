@@ -1,9 +1,10 @@
 # BIO634 - Next generation sequencing (NGS) II. Transcriptomes, Variant Calling and Biological Interpretation
-## December 3-4th 2020 
+## June 3-4th 2021 
 ![alt text](https://github.com/carlalbc/URPP_tutorials/blob/master/img/Logo_URPP_kl2.png)
 ### University of Zürich (UZH) & URPP Evolution in action
 ----------
 ## Day 2.- RNA-seq and gene expression analyses
+
 ### I. Analyzing RNA-seq data with Salmon
 
 *(Tutorial modified from the [Salmon](https://combine-lab.github.io/salmon/) official documentation)*
@@ -13,44 +14,6 @@ Today we will use **[Salmon](https://combine-lab.github.io/salmon/)** to align a
 [Salmon](https://combine-lab.github.io/salmon/) is a tool for quantifying the expression of transcripts using RNA-seq data. Salmon uses new algorithms (specifically, coupling the concept of *[quasi-mapping](https://academic.oup.com/bioinformatics/article/32/12/i192/2288985)* with a two-phase inference procedure) to provide accurate expression estimates very quickly (i.e. *wicked-fast*) and while using little memory. In Salmon it's all about quantification! 
 
 :information_source: You could also use the STAR aligner, it is particularly good for all genomes where there are no alternatives alleles. For genomes such as hg38 that have alt alleles, hisat2 should be used as it handles the alts correctly and STAR does not yet. Use Tophat2 only if you do not have enough RAM available to run STAR (about 30 GB). The documentation for STAR is available [here](https://github.com/alexdobin/STAR/raw/master/doc/STARmanual.pdf).
-
-### Salmon installation 
-:information_source: Because you are using an Ubuntu Docker image, you will probably have Salmon already installed, so skip this part.
-
-Installation from source: 
-
-```sh
-# Make software directory in your home folder
-mkdir ~/software
-#Go to directory
-cd ~/software
-# Get the source file
-wget https://github.com/COMBINE-lab/salmon/releases/download/v0.14.0/salmon-0.14.0_linux_x86_64.tar.gz
-# Uncompress the file
-tar xzvf salmon-0.14.0_linux_x86_64.tar.gz
-# Export salmon into your PATH variable
-export PATH=$PATH:~/software/salmon-latest_linux_x86_64/bin/
-```
-:information_source: If you had conda installed in your system, you could also install it with conda which would be much faster.
-
-- Run salmon in the terminal:
-```
-$ salmon -h
-salmon v0.14.0
-
-Usage:  salmon -h|--help or 
-        salmon -v|--version or 
-        salmon -c|--cite or 
-        salmon [--no-version-check] <COMMAND> [-h | options]
-
-Commands:
-     index Create a salmon index
-     quant Quantify a sample
-     alevin single cell analysis
-     swim  Perform super-secret operation
-     quantmerge Merge multiple quantifications into a single file
-
-```
 
 ### a) Obtaining a transcriptome and building and index 
 In order to quantify transcript-level abundances, Salmon requires a target transcriptome. 
