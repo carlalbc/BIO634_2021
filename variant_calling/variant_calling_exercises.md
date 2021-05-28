@@ -69,10 +69,8 @@ In our sample we observe very few anomalous read pairs, so we will skip for now 
 We remove duplicate reads using samtools:
 ```
 samtools rmdup Ecoli_DH10B.bam Ecoli_DH10B-rmdup.bam
-[bam_rmdup_core] 1200 / 650578 = 0.0018 in library
 ```
-Our file only contains 0.18% of duplicate reads.
-(We could also just mark duplicate reads using Picard tools, reads marked as duplicates in the BAM file will then be ignored by freebayes).
+Our file only contains 0.18% of duplicate reads (we could also just mark duplicate reads using Picard tools, reads marked as duplicates in the BAM file will then be ignored by freebayes).
 
 That's it, now we have an analysis-ready BAM.
 
@@ -194,34 +192,34 @@ In contrast, for GATK it is recommended to use all 3 BAM preprocessing steps. Le
 - GATK is slow and resource-hungry. If you want to run it for pooled or population data, prepare to run in on a cluster.
 - GATK is under constant development. Check the website from time to time.
 
-The following script `Run_GATK_Ecoli.sh` runs a GATK pipeline for the *E.coli* BAM file. Change the variable BAMFILE if you have renamed the BAM file earlier.
+The following script `Run_GATK_Ecoli.sh` runs a GATK pipeline for the *E.coli* BAM file:
 ```
 #!/bin/bash
 set -o nounset
 set -o errexit
 
- # BAM processing using PICARD, SNP calling using GATK
+# BAM processing using PICARD, SNP calling using GATK
 
 SAMTOOLS=samtools
 JAVA=~/software/jdk1.8.0_211/bin/java
 GATK=~/software/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef/GenomeAnalysisTK.jar
 PICARD=~/software/picard/picard.2.18.0.jar
 
- # IDEAS to improve the script:
- # add variable with memory parameter to java -Xmx6g
- # add 2> to capture errors
- # add input and output folders
+# IDEAS to improve the script:
+# add variable with memory parameter to java -Xmx6g
+# add 2> to capture errors
+# add input and output folders
 
 REF_FILE=EcoliDH10B.fa
-BAM_FILE=MiSeq_Ecoli_DH10B_110721_PF_subsample.bam
- # outfolder=gatk_variants
+BAM_FILE=Ecoli_DH10B.bam
+# outfolder=gatk_variants
 
- # build indexes for Genome and BAM files
+# build indexes for Genome and BAM files
 $SAMTOOLS faidx $REF_FILE
 $SAMTOOLS index $BAM_FILE
 java -jar $PICARD CreateSequenceDictionary R=$REF_FILE O=${REF_FILE%%.*}.dict
 
- # sort mappings by name to keep paired reads together
+# sort mappings by name to keep paired reads together
 $JAVA -Xmx1g -jar $PICARD SortSam \
 	I=$BAM_FILE \
 	O=${BAM_FILE%%.*}_sorted.bam \
@@ -229,7 +227,7 @@ $JAVA -Xmx1g -jar $PICARD SortSam \
 	VALIDATION_STRINGENCY=LENIENT \
 	2>SortSam_queryname.err
 
- # fix mate information and sort
+# fix mate information and sort
 $JAVA -Xmx1g -jar $PICARD FixMateInformation \
 	I=${BAM_FILE%%.*}_sorted.bam \
 	O=${BAM_FILE%%.*}_fixmate.bam \
@@ -237,8 +235,7 @@ $JAVA -Xmx1g -jar $PICARD FixMateInformation \
 	VALIDATION_STRINGENCY=LENIENT \
 	2>FixMateInformation.err
 
-
- # mark duplicates
+# mark duplicates
 $JAVA -Xmx1g -jar $PICARD MarkDuplicates \
 	I=${BAM_FILE%%.*}_fixmate.bam \
 	O=${BAM_FILE%%.*}_rdup.bam \
@@ -246,8 +243,7 @@ $JAVA -Xmx1g -jar $PICARD MarkDuplicates \
 	VALIDATION_STRINGENCY=LENIENT \
 	#2>MarkDuplicates.err
 
-
- # Add Read Groups @RG
+# Add Read Groups @RG
 $JAVA -Xmx1g -jar $PICARD AddOrReplaceReadGroups \
 	I=${BAM_FILE%%.*}_rdup.bam \
 	O=${BAM_FILE%%.*}_rdup-rg.bam \
@@ -259,33 +255,32 @@ $JAVA -Xmx1g -jar $PICARD AddOrReplaceReadGroups \
 	VALIDATION_STRINGENCY=LENIENT \
 	# 2>AddOrReplaceReadGroups.err
 
- # Build BAM index for fast access
+# Build BAM index for fast access
 $JAVA -Xmx1g -jar $PICARD BuildBamIndex \
 	I=${BAM_FILE%%.*}_rdup-rg.bam \
 	2>BuildBamIndex.err
 
-
- # identify regions for indel local realignment of the selected chromosome
+# identify regions for indel local realignment of the selected chromosome
 $JAVA -Xmx1g -jar $GATK -T RealignerTargetCreator \
 	-R $REF_FILE \
 	-I ${BAM_FILE%%.*}_rdup-rg.bam \
 	-o target_intervals.list
 
- # perform indel local realignment of the selected chromosome
+# perform indel local realignment of the selected chromosome
 $JAVA -Xmx1g -jar $GATK -T IndelRealigner \
 	-R $REF_FILE \
 	-I ${BAM_FILE%%.*}_rdup-rg.bam \
 	-targetIntervals target_intervals.list \
 	-o ${BAM_FILE%%.bam}_realigned.bam
 
- # analyze patterns of covariation
- # only possible with known SNPs 
- # for non-model organisms it is possiple to interpret the high quality fraction of called SNPs as knownSites and perform multiple rounds of BaseRecalibration and SNPcalling
- #java -Xmx1g -jar $GATK -T BaseRecalibrator -R $REF_FILE -I ${BAM_FILE%%.bam}_realigned.bam
- #	-knownSites ${dbsnp} -knownSites ${gold_indels} -o recal_data.table 2>BaseRecalibrator.err
+# analyze patterns of covariation
+# only possible with known SNPs 
+# non-model organisms -> possiple to interpret the high quality fraction of called SNPs as knownSites + perform multi-rounds of BaseRecalibration and SNPcalling
+#java -Xmx1g -jar $GATK -T BaseRecalibrator -R $REF_FILE -I ${BAM_FILE%%.bam}_realigned.bam
+#	-knownSites ${dbsnp} -knownSites ${gold_indels} -o recal_data.table 2>BaseRecalibrator.err
 
- #1. Run UnifiedGenotyper
- # this takes approx. 1.8 min
+#1. Run UnifiedGenotyper
+# this takes approx. 1.8 min
 $JAVA -Xmx1g -jar $GATK -T UnifiedGenotyper \
 	-R $REF_FILE \
 	-I ${BAM_FILE%%.bam}_realigned.bam \
@@ -295,7 +290,7 @@ $JAVA -Xmx1g -jar $GATK -T UnifiedGenotyper \
 	-mbq 10 \
 	-o raw_variants_UG.vcf
  
- #2. Run HaplotypeCaller
+#2. Run HaplotypeCaller
 $JAVA -Xmx1g -jar $GATK -T HaplotypeCaller \
 	-R $REF_FILE \
 	-I ${BAM_FILE%%.bam}_realigned.bam \
@@ -317,12 +312,13 @@ We will download only a subset of the original data (to safe disk space and exec
 
 - First create a new folder and download this human sample (The download may take some minutes - in the meanwhile, open a new tab of your terminal and proceed with the next steps). Download the sequence of chromosome 20 and the bam file from Dropbox:
 ```
-wget https://www.dropbox.com/s/rc7rdbm764mm89s/human_example.zip
+wget https://bioinfo.evolution.uzh.ch/share/data/bio634/human_example.zip
 ```
  
 The BAM file was prepared for you like this (you don't have to do it): 
-  ```
-  samtools view -h ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase1/data/HG00154/alignment/HG00154.mapped.ILLUMINA.bwa.GBR.low_coverage.20101123.bam 20:1000000-2000000 > HG00154.low_coverage.chr20.1000000-2000000.sam
+
+```
+samtools view -h ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase1/data/HG00154/alignment/HG00154.mapped.ILLUMINA.bwa.GBR.low_coverage.20101123.bam 20:1000000-2000000 > HG00154.low_coverage.chr20.1000000-2000000.sam
 samtools view -bS HG00154.low_coverage.chr20.1000000-2000000.sam > HG00154.low_coverage.chr20.1000000-2000000.bam
 ```
     
@@ -354,8 +350,6 @@ Here we check how many databases are available for the Arabidopsis genus.
 
 ```
 java -jar snpEff.jar databases | grep Arabidopsis
-Arabidopsis_lyrata Arabidopsis_lyrata ENSEMBL_BFMPP_32_24
-Arabidopsis_thaliana Arabidopsis_thaliana ENSEMBL_BFMPP_32_24
 ```
 
 We see that there are databases available for A. thaliana (both TAIR9 and TAIR10 annotation) and A. lyrata. 
@@ -380,13 +374,13 @@ See the [snpEff documentation](https://pcingola.github.io/SnpEff/se_running/) fo
 ### Exercise: VCFtools
 
 VCFtools are specialized tools for working with VCF files: validating, filtering merging, comparing and calculate some basic population genetic statistics, [see the documentation](http://vcftools.sourceforge.net/docs.html). There are many other tools with similar functionality available for the same purpose.
-￼￼￼￼￼￼
+
 ### Exercise: How many low-coverage regions?
 
 Often some regions of the genome are low coverage only (or even without any aligned reads) consequently we cannot tell whether polymorphisms exist in these regions. We want to identify such regions and find out whether they overlap with genes.
 The bedtools utilities are convenient for working with genomic coordinates for example bedtools allows one to intersect, merge, count, complement, and shuffle genomic intervals from multiple files in widely-used genomic file formats such as BAM, BED, GFF/GTF, VCF. You will find the documentation under http://bedtools.readthedocs.org/en/latest/index.html
 
-Use `MiSeq_Ecoli_DH10B_110721_PF_subsample.bam` from the first exercise.  
+Use `Ecoli_DH10B.bam` from the first exercise.  
 
 - Try to find out how many nucleotides in the *E. coli* genome do not reach a minimal read coverage of 5, 10 or 20 reads (Hint: Use samtools depth, direct the output into a file and then use awk or R to process the file)
 - Do some low coverage nucleotides overlap with annotated genes? (Hint: use the command intersect from bedtools)
@@ -395,7 +389,7 @@ Use `MiSeq_Ecoli_DH10B_110721_PF_subsample.bam` from the first exercise.
 
 #### Solution
 ```
-samtools depth MiSeq_Ecoli_DH10B_110721_PF_subsample.bam | awk 'BEGIN{OFS="\t"} $3<10 {print $1,$2-1,$2}' | bedtools merge -i - | head
+samtools depth Ecoli_DH10B.bam | awk 'BEGIN{OFS="\t"} $3<10 {print $1,$2-1,$2}' | bedtools merge -i - | head
 EcoliDH10B.fa	0	17
 EcoliDH10B.fa	15618	15749
 EcoliDH10B.fa	16379	16496
@@ -466,33 +460,29 @@ Nice! We now have a familiar VCF file.
 #### SNP calling using freebayes with BAM preprocessing (fix mate pairs, mark duplicates)
 
 ```
-#SAMTOOLS=~/software/SAMTOOLS/samtools-1.3
 SAMTOOLS=samtools
-PICARD=~/APPL/PICARD/picard.2.18.0.jar
-FREEBAYES=~/APPL/FREEBAYES/freebayes/bin/freebayes
+PICARD=~/software/picard/picard.2.18.0.jar
+FREEBAYES=~/software/freebayes/freebayes
 
 memory="1G"
 threads=1
 
-cp -p MiSeq_Ecoli_DH10B_110721_PF_subsample.bam Ecoli_DH10B.bam
-
- # sort reads by name required by the next command
+# sort reads by name required by the next command
 $SAMTOOLS sort -n -m $memory -@ $threads -O bam -T /tmp/sort1 -o Ecoli_DH10B-sorted.bam Ecoli_DH10B.bam
 
- # fix mate information and output to bam
+# fix mate information and output to bam
 $SAMTOOLS fixmate -O bam Ecoli_DH10B-sorted.bam Ecoli_DH10B-fixmate.bam
 
- # sort the bam data by position
+# sort the bam data by position
 $SAMTOOLS sort -m $memory -@ $threads -O bam -T /tmp/sort2 -o Ecoli_DH10B-pos-sorted.bam Ecoli_DH10B-fixmate.bam
 
- # mark duplicates
- # Note that we use samtools version 0.1.18 here as this function is not yet implemented in samtools v1.2
-samtools rmdup Ecoli_DH10B-pos-sorted.bam Ecoli_DH10B-fixmate-mdup.bam
- #$SAMTOOLS rmdup Ecoli_DH10B-pos-sorted.bam Ecoli_DH10B-fixmate-mdup.bam
+# mark duplicates
+# Note that we use samtools version 0.1.18 here as this function is not yet implemented in samtools v1.2
+$SAMTOOLS rmdup Ecoli_DH10B-pos-sorted.bam Ecoli_DH10B-fixmate-mdup.bam
 
- # index BAM file$
+# index BAM file$
 $SAMTOOLS index Ecoli_DH10B-fixmate-mdup.bam
 
- # call variants
+# call variants
 $FREEBAYES -f EcoliDH10B.fa -p 1 Ecoli_DH10B-fixmate-mdup.bam > Ecoli_DH10B-fixmate-mdup.vcf
 ```

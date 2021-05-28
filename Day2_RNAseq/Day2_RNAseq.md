@@ -1,9 +1,10 @@
 # BIO634 - Next generation sequencing (NGS) II. Transcriptomes, Variant Calling and Biological Interpretation
-## December 3-4th 2020 
+## June 3-4th 2021 
 ![alt text](https://github.com/carlalbc/URPP_tutorials/blob/master/img/Logo_URPP_kl2.png)
 ### University of Zürich (UZH) & URPP Evolution in action
 ----------
 ## Day 2.- RNA-seq and gene expression analyses
+
 ### I. Analyzing RNA-seq data with Salmon
 
 *(Tutorial modified from the [Salmon](https://combine-lab.github.io/salmon/) official documentation)*
@@ -14,45 +15,8 @@ Today we will use **[Salmon](https://combine-lab.github.io/salmon/)** to align a
 
 :information_source: You could also use the STAR aligner, it is particularly good for all genomes where there are no alternatives alleles. For genomes such as hg38 that have alt alleles, hisat2 should be used as it handles the alts correctly and STAR does not yet. Use Tophat2 only if you do not have enough RAM available to run STAR (about 30 GB). The documentation for STAR is available [here](https://github.com/alexdobin/STAR/raw/master/doc/STARmanual.pdf).
 
-### Salmon installation 
-:information_source: Because you are using an Ubuntu Docker image, you will probably have Salmon already installed, so skip this part.
+### a) Obtaining the transcriptome and building the index 
 
-Installation from source: 
-
-```sh
-# Make software directory in your home folder
-mkdir ~/software
-#Go to directory
-cd ~/software
-# Get the source file
-wget https://github.com/COMBINE-lab/salmon/releases/download/v0.14.0/salmon-0.14.0_linux_x86_64.tar.gz
-# Uncompress the file
-tar xzvf salmon-0.14.0_linux_x86_64.tar.gz
-# Export salmon into your PATH variable
-export PATH=$PATH:~/software/salmon-latest_linux_x86_64/bin/
-```
-:information_source: If you had conda installed in your system, you could also install it with conda which would be much faster.
-
-- Run salmon in the terminal:
-```
-$ salmon -h
-salmon v0.14.0
-
-Usage:  salmon -h|--help or 
-        salmon -v|--version or 
-        salmon -c|--cite or 
-        salmon [--no-version-check] <COMMAND> [-h | options]
-
-Commands:
-     index Create a salmon index
-     quant Quantify a sample
-     alevin single cell analysis
-     swim  Perform super-secret operation
-     quantmerge Merge multiple quantifications into a single file
-
-```
-
-### a) Obtaining a transcriptome and building and index 
 In order to quantify transcript-level abundances, Salmon requires a target transcriptome. 
 
 This transcriptome is given to Salmon in the form of a (possibly compressed) multi-FASTA file, with each entry providing the sequence of a transcript. 
@@ -60,17 +24,16 @@ This transcriptome is given to Salmon in the form of a (possibly compressed) mul
 For this example, we’ll be analyzing some *Arabidopsis thaliana* data, so we’ll download and index the *A. thaliana* transcriptome. 
 - First, create a directory where we’ll do our analysis, let’s call it `salmon`: 
 
-
 ```sh
 # Make a working directory on your ~/storage directory and go to it
-mkdir ~/storage/salmon
-cd ~/storage/salmon
+mkdir ~/data/salmon
+cd ~/data/salmon
 ```
 
 - Download the transcriptome:
 
 ```sh
-$ wget ftp://ftp.ensemblgenomes.org/pub/plants/release-28/fasta/arabidopsis_thaliana/cdna/Arabidopsis_thaliana.TAIR10.28.cdna.all.fa.gz -o athal.fa.gz
+wget ftp://ftp.ensemblgenomes.org/pub/plants/release-28/fasta/arabidopsis_thaliana/cdna/Arabidopsis_thaliana.TAIR10.28.cdna.all.fa.gz -O athal.fa.gz
 ```
 
 Here, we’ve used a reference transcriptome for Arabadopsis. However, one of the benefits of performing quantification directly on the transcriptome (rather than via the host genome), is that one can easily quantify assembled transcripts as well (obtained via software such as StringTie for organisms with a reference or Trinity for de novo RNA-seq experiments).
@@ -78,7 +41,6 @@ Here, we’ve used a reference transcriptome for Arabadopsis. However, one of th
 Next, we’re going to build an index on our transcriptome. The index is a structure that salmon uses to quasi-map RNA-seq reads during quantification. The index need only be constructed once per transcriptome, and it can then be reused to quantify many experiments. 
 
 - Now we use the index command of salmon to build our index:
-
 
 ```
 salmon index -t athal.fa.gz -i athal_index
@@ -91,14 +53,14 @@ In addition to the index, salmon obviously requires the RNA-seq reads from the e
 
 ```sh
 #!/bin/bash
-mkdir data
-cd data
+mkdir RNAseq
+cd RNAseq
 for i in `seq 25 28`; 
 do 
   mkdir DRR0161${i}; 
   cd DRR0161${i}; 
-  wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/DRR016/DRR0161${i}/DRR0161${i}_1.fastq.gz; 
-  wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/DRR016/DRR0161${i}/DRR0161${i}_2.fastq.gz; 
+  wget https://bioinfo.evolution.uzh.ch/share/data/bio634/RNAseq/DRR0161${i}/DRR0161${i}_1.fastq.gz; 
+  wget https://bioinfo.evolution.uzh.ch/share/data/bio634/RNAseq/DRR0161${i}/DRR0161${i}_2.fastq.gz; 
   cd ..; 
 done
 cd .. 
@@ -117,14 +79,14 @@ Now that we have our index built and all of our data downloaded, we’re ready t
 
 ```sh
 #!/bin/bash
-for fn in data/DRR0161{25..28};
+for fn in RNAseq/DRR0161{25..28};
 do
 samp=`basename ${fn}`
 echo "Processing sample ${samp}"
 salmon quant -i athal_index -l A \
          -1 ${fn}/${samp}_1.fastq.gz \
          -2 ${fn}/${samp}_2.fastq.gz \
-         -p 8 --validateMappings -o quants/${samp}_quant
+         -p 2 --validateMappings -o quants/${samp}_quant
 done 
 ```
 
@@ -136,7 +98,7 @@ done
 bash quant_samples.sh
 ```
 
-This script simply loops through each sample and invokes `salmon` using fairly barebone options. The `-i` argument tells salmon where to find the index `-l A` tells salmon that it should automatically determine the library type of the sequencing reads (e.g. stranded vs. unstranded etc.). The `-1` and `-2` arguments tell salmon where to find the left and right reads for this sample (notice, salmon will accept gzipped FASTQ files directly). Finally, the `-p 8` argument tells salmon to make use of 8 threads and the `-o` argument specifies the directory where salmon’s quantification results sould be written. Salmon exposes *many* different options to the user that enable extra features or modify default behavior. However, the purpose and behavior of all of those options is beyond the scope of this introductory tutorial. You can read about salmon’s many options in the [documentation](http://salmon.readthedocs.io/en/latest/).
+This script simply loops through each sample and invokes `salmon` using fairly barebone options. The `-i` argument tells salmon where to find the index `-l A` tells salmon that it should automatically determine the library type of the sequencing reads (e.g. stranded vs. unstranded etc.). The `-1` and `-2` arguments tell salmon where to find the left and right reads for this sample (notice, salmon will accept gzipped FASTQ files directly). Finally, the `-p 2` argument tells salmon to make use of 2 threads and the `-o` argument specifies the directory where salmon’s quantification results sould be written. Salmon exposes *many* different options to the user that enable extra features or modify default behavior. However, the purpose and behavior of all of those options is beyond the scope of this introductory tutorial. You can read about salmon’s many options in the [documentation](http://salmon.readthedocs.io/en/latest/).
 
 After the salmon commands finish running, you should have a directory named `quants`, which will have a sub-directory for each sample. These sub-directories contain the quantification results of salmon, as well as a lot of other information salmon records about the sample and the run. The main output file (called `quant.sf`) is rather self-explanatory. For example, take a peek at the quantification file for sample `DRR016125` in `quants/DRR016125/quant.sf` and you’ll see a simple TSV format file listing the name (`Name`) of each transcript, its length (`Length`), effective length (`EffectiveLength`) (more details on this in the documentation), and its abundance in terms of Transcripts Per Million (`TPM`) and estimated number of reads (`NumReads`) originating from this transcript.
 
