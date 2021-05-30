@@ -19,8 +19,8 @@ Carla Bello (carla.bello@ieu.uzh.ch) & Gregor Rot (gregor.rot@uzh.ch)
 11.00 - 12.00 | **QC and Mapping: Continuation** | CB & GR
 12.00 - 13.30 | *Lunch break*
 13.30 - 14.30 | **Variant Calling 2** <br /> [Presentation](variant_calling/variant_calling_presentation.pdf)  \| [Hands-on](variant_calling/variant_calling_exercises.md) | GR & CB
-14.30 - 14.45 | *Coffee break*
-14.45 - 16.00 | *Talk:* Dr. Jean-Claude Walser (ETH): <br /> RNA-seq in ecology and evolutionary biology [pdf](UniZH_Bio634_JCW_190603.pdf) -CANCELLED-
+14.30 - 15.00 | *Coffee break*
+15.00 - 16.00 | *Talk:* Dr. Jean-Claude Walser (ETH): <br /> RNA-seq in ecology and evolutionary biology [pdf](UniZH_Bio634_JCW_190603.pdf) 
 
 ### Day 2
 &nbsp; | &nbsp; | &nbsp;
