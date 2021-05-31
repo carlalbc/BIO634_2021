@@ -7,7 +7,7 @@
 
 ## Before we start: Docker setup:
 
-Please follow instruction on https://github.com/grexor/teachingDocker to initialize your Docker environment.
+Please follow the instructions on https://github.com/grexor/teachingDocker to initialize your Docker environment.
 
 When successful, you should see a prompt:
 
