@@ -7,7 +7,7 @@ We will practise the 3 different ways of making sense of a gene list we have dis
 Please clone this repository into the storage folder with:
 
 ```
-cd /home/student/storage
+cd /home/student/data
 git clone https://github.com/carlalbc/BIO634_2020
 ```
 
