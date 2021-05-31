@@ -1,6 +1,6 @@
 # BIO634 - Next generation sequencing (NGS) II. Transcriptomes, Variant Calling and Biological Interpretation
 
-## Dec 3 - 4th, 2020
+## June 3 - 4th, 2021
 ### University of Zürich (UZH) & URPP "Evolution in action"
 
 ![alt text](https://github.com/carlalbc/URPP_tutorials/blob/master/img/Logo_URPP_kl2.png)
