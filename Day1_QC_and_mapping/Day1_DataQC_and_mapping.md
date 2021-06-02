@@ -1,13 +1,13 @@
 # BIO634 - Next generation sequencing (NGS) II. Transcriptomes, Variant Calling and Biological Interpretation
 
-## Dec 3 - 4th, 2020
+## June 3 - 4th, 2021
 ### University of Zürich (UZH) & URPP "Evolution in action"
 
 ![alt text](https://github.com/carlalbc/URPP_tutorials/blob/master/img/Logo_URPP_kl2.png)
 
 ## Before we start: Docker setup:
 
-Please follow instruction on https://github.com/grexor/teachingDocker to initialize your Docker environment.
+Please follow the instructions on https://github.com/grexor/teachingDocker to initialize your Docker environment.
 
 When successful, you should see a prompt:
 
