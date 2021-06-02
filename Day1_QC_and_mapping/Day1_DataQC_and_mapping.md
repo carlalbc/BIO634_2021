@@ -76,7 +76,7 @@ mkdir FastQC
 
 #### 2. Download the FASTQ files from ENA - we will work with paired-end (PE) reads from *E. coli*:
 
-- Verify that you are the directory `~/storage/mapping/fastq/SRR6170103` by using `pwd`. If you are continue with the below commands to download the files that we will work on today.
+- Verify that you are the directory `~/data/mapping/fastq/SRR6170103` by using `pwd`. If you are continue with the below commands to download the files that we will work on today.
 
 ```sh 
 # Get both FASTQ PE read files from ENA and store it in the subdirectory we just created:
@@ -146,7 +146,7 @@ mv *.zip *.html ~/data/mapping/fastq/SRR6170103/FastQC
 cd ~/data/mapping/fastq/SRR6170103/FastQC
 ``` 
 
-:information_source: **Reminder:** You can always check where you are in the terminal using `pwd` - you should be at `~/storage/mapping/FastQC`
+:information_source: **Reminder:** You can always check where you are in the terminal using `pwd` - you should be at `~/data/mapping/FastQC`
 
 
 #### 2) Open the FastQC results with your favorite html visualizer (i.e firefox, chrome, etc.) or if you prefer it, you can open the file through your GUI by directly clicking on it.
@@ -211,7 +211,7 @@ The parameters used for Trimmomatic are defined as follows:
 #### a) Trimming PE reads and removing adapters:
 
 - Go to the folder where you have your reads:
-`cd ~/storage/mapping/fastq/SRR6170103`
+`cd ~/data/mapping/fastq/SRR6170103`
 - Then run Trimmomatic:
 ```sh
 # Trimming and removing Illumina adapters
