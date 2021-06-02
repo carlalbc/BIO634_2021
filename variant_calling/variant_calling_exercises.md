@@ -94,7 +94,7 @@ Many downstream applications only work with compressed & indexed vcf files using
 bgzip -c Ecoli_DH10B-rmdup.vcf > Ecoli_DH10B-rmdup.vcf.gz
 tabix -p vcf Ecoli_DH10B-rmdup.vcf.gz
 ```
-As we have to do this for each vcf file, we write a script that does the job. Save the script below as `indexVCF.sh` and make it executable. It sorts, compresses and indexes a vcf file by doing: `./indexVCF.sh Ecoli_DH10B-rmdup.vcf` 
+If we have to do this for several vcf files, we write a script that does the job. Save the script below as `indexVCF.sh` and make it executable. It sorts, compresses and indexes a vcf file by doing: `./indexVCF.sh Ecoli_DH10B-rmdup.vcf` 
 ```
 #!/bin/bash
 # processes a vcf file for downstream analysis: sorting by chromosome and position, compressing, and indexing a vcf file
