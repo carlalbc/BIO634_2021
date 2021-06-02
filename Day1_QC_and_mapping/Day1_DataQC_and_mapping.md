@@ -425,7 +425,10 @@ There are several options to visualize the data on IGV:
 - Register, and you’ll find the IGV Java Web start. Launch IGV with 750 MB.
 - Load the bam file using *E. coli*'s reference genome.
 
-2) Install IGV on your computer, just follow the instructions on - download your OS version: 
+2) Run the Web app: https://igv.org/app/
+- Load the bam file using *E. coli*'s reference genome.
+
+3) Install IGV on your computer, just follow the instructions on - download your OS version: 
 
 https://www.broadinstitute.org/software/igv/download
 
