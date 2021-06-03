@@ -112,7 +112,7 @@ That’s it! Quantifying your RNA-seq data with salmon is that simple (and fast)
 
 - You can use [Tximport](https://bioconductor.org/packages/release/bioc/vignettes/tximport/inst/doc/tximport.html#import-transcript-level-estimates) to import the quantification files obtained
 
-## Only install this package today:
+### Install these packages in R:
 
 ```R
 #Open R by typing R in the terminal:
@@ -127,7 +127,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 BiocManager::install(c("TxDb.Hsapiens.UCSC.hg19.knownGene", "readr"))
 ```
 
-#Load the library in R:
+### Load the library in R:
 
 **Note:** You can change `system.file`, for the `/path/to/dir` (Here we use `system.file` to locate the package directory, but for a typical use, we would just provide a path, e.g. `/path/to/dir`.)
 
