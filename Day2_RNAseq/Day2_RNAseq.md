@@ -148,7 +148,17 @@ list.files(dir)
 
 You can follow the steps in the [workflow](https://bioconductor.org/packages/release/bioc/vignettes/tximport/inst/doc/tximport.html#import-transcript-level-estimates) of **Tximport** with any dataset of your interest.
 
-### II. Exploration of airway library: 
+
+### II. Analyzing RNA seq data with DESeq2:
+
+If you already worked with Tximport on step I, you can start doing differential analyses on your quantified samples. Alternatively you can follow this guideline and skip the previous exercise.
+
+This [guideline](http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html) explains the steps to follow when doing differential expression analyses with RNAseq data.
+
+**NOTE**: Skip the Tximport part on this guideline and start from the **Count matrix input** section if you already did exercise I.
+
+
+### III. Exploration of airway library (OPTIONAL): 
 
 - To start let's install some R packages. In the terminal write the following:
 
@@ -167,129 +177,6 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 Now go to the following [link](https://www.bioconductor.org/help/course-materials/2016/CSAMA/lab-3-rnaseq/rnaseq_gene_CSAMA2016.html
 ) to where it says *"Locating BAM files and the sample table"* and start from there.
 
-
-### III. (((Optional))) Differential expression analysis: Comparison between DESEq and edgeR
-
-
-#### Step 1 and 2: Open **rstudio** by typing ***rstudio*** in the command-line and install the packages like in the previous part.
-
-- You can always copy&paste, but it is important that you understand what you are doing... go through chunks of the modules instead of everything at once. Each module is separated by a *#* which denotes a "comment" on the script. 
-
-- Install dependencies
-`BiocManager::install(c("DESeq2", "edgeR", "VennDiagram"))`
-
-- Start by loading the libraries:
-
-```
-library(DESeq2) 
-library(edgeR) 
-library(VennDiagram)
-
-
-# Read in data ------------------------------------------------------------
-
-## Use pasilla data (from Drosophila)
-datafile = system.file( "extdata/pasilla_gene_counts.tsv", package="pasilla" )
-datafile
-
-
-## Read in the data making the row names the first column
-counttable <- read.table(datafile, header=T, row.names=1)
-head(counttable)
-```
-
-### Make metadata data.frame
-
-```
-meta <- data.frame(
-  row.names=colnames(counttable),
-  condition=c("untreated", "untreated", "untreated", "untreated", "treated", "treated", "treated"),
-  libType=c("single", "single", "paired", "paired", "single", "paired", "paired"))
-meta$condition <- relevel(meta$condition, ref="untreated")
-meta
-
-## Independent filtering?
-# keep_cpm <- rowSums(cpm(counttable)>2) >=2
-# keep_quantile <- rowSums(counttable)>quantile(rowSums(counttable), probs=.5)
-# addmargins(table(keep_cpm, keep_quantile))
-# counttable <- counttable[keep_cpm, ]
-
-# DESeq -------------------------------------------------------------------
-
-## Make a new countDataSet
-d <- newCountDataSet(counttable, meta)
-
-## Estimate library size and dispersion
-d <- estimateSizeFactors(d)
-d <- estimateDispersions(d)
-plotDispEsts(d, main="DESeq: Per-gene dispersion estimates")
-
-## Principal components biplot on variance stabilized data, color-coded by condition-librarytype
-print(plotPCA(varianceStabilizingTransformation(d), intgroup=c("condition", "libType")))
-
-## Fit full and reduced models, get p-values
-dfit1 <- fitNbinomGLMs(d, count~libType+condition)
-dfit0 <- fitNbinomGLMs(d, count~libType)
-dpval <- nbinomGLMTest(dfit1, dfit0)
-dpadj <- p.adjust(dpval, method="BH")
-
-## Make results table with pvalues and adjusted p-values
-dtable <- transform(dfit1, pval=dpval, padj=dpadj)
-dtable <- dtable[order(dtable$padj), ]
-head(dtable)
-
-# Now with edgeR
-
-# edgeR -------------------------------------------------------------------
-
-## Make design matrix
-condition <- relevel(factor(meta$condition), ref="untreated")
-libType <- factor(meta$libType)
-edesign <- model.matrix(~libType+condition)
-
-## Make new DGEList, normalize by library size, and estimate dispersion allowing possible trend with average count size
-e <- DGEList(counts=counttable)
-e <- calcNormFactors(e)
-e <- estimateGLMCommonDisp(e, edesign)
-e <- estimateGLMTrendedDisp(e, edesign) 
-e <- estimateGLMTagwiseDisp(e, edesign)
-
-## MDS Plot
-plotMDS(e, main="edgeR MDS Plot")
-
-## Biological coefficient of variation plot
-plotBCV(e, cex=0.4, main="edgeR: Biological coefficient of variation (BCV) vs abundance")
-
-## Fit the model, testing the coefficient for the treated vs untreated comparison
-efit <- glmFit(e, edesign)
-efit <- glmLRT(efit, coef="conditiontreated")
-
-## Make a table of results
-etable <- topTags(efit, n=nrow(e))$table
-etable <- etable[order(etable$FDR), ]
-head(etable)
-
-## ~MA Plot
-with(etable, plot(logCPM, logFC, pch=20, main="edgeR: Fold change vs abundance"))
-with(subset(etable, FDR<0.05), points(logCPM, logFC, pch=20, col="red"))
-abline(h=c(-1,1), col="blue")
-
-# Comparison --------------------------------------------------------------
-
-head(etable)
-head(dtable)
-
-addmargins(table(sig.edgeR=etable$FDR<0.05, sig.DESeq=dtable$padj<0.05))
-
-merged <- merge(etable, dtable, by='row.names')
-with(                     merged, plot(logFC, conditiontreated, xlab="logFC edgeR", ylab="logFC DESeq", pch=20, col="black", main="Fold change for DESeq vs edgeR"))
-with(subset(merged, FDR<0.05),  points(logFC, conditiontreated, xlab="logFC edgeR", ylab="logFC DESeq", pch=20, col="red"))
-with(subset(merged, padj<0.05), points(logFC, conditiontreated, xlab="logFC edgeR", ylab="logFC DESeq", pch=20, col="green"))
-legend("topleft", xjust=1, yjust=1, legend=c("FDR<0.05 edgeR only", "FDR<0.05 DESeq & edgeR", "FDR>0.05"), pch=20, col=c("red", "green", "black"), bty="n")
-
-```
-
-- Taken from "A survey of best practices for RNA-seq data analysis" https://doi.org/10.1186/s13059-016-0881-8
 
 
 # Useful workflows for RNA-seq data analyses
