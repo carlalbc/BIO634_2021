@@ -279,6 +279,7 @@ legend("topleft", xjust=1, yjust=1, legend=c("FDR<0.05 edgeR only", "FDR<0.05 DE
 
 # Useful workflows for RNA-seq data analyses
 
+- [Differential Gene Expression using RNA-Seq. A Workflow](https://github.com/twbattaglia/RNAseq-workflow/blob/master/README.md)
 - [RNA-seq workflow: gene-level exploratory analysis and differential expression, 2018](https://www.bioconductor.org/packages/devel/workflows/vignettes/rnaseqGene/inst/doc/rnaseqGene.html)
 - [Importing transcript abundance datasets with Tximport, 2019 workflow](https://bioconductor.org/packages/release/bioc/vignettes/tximport/inst/doc/tximport.html).
 
