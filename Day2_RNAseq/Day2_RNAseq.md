@@ -132,7 +132,7 @@ R
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
-BiocManager::install("TxDb.Hsapiens.UCSC.hg19.knownGene")
+BiocManager::install(c("TxDb.Hsapiens.UCSC.hg19.knownGene", "readr"))
 ```
 
 
