@@ -452,7 +452,9 @@ There are several options to visualize the data on IGV:
 - Load the bam file using *E. coli*'s reference genome.
 
 2) Run the Web app: https://igv.org/app/
-- Load the bam file using *E. coli*'s reference genome.
+- Load the reference genome from *E. coli* (.fna and it's index .fai) using the "Genome".
+- Load the bam file and its index (.bai) using the "Tracks" option.
+- Zoom in to see the reads
 
 3) Install IGV on your computer, just follow the instructions on - download your OS version: 
 
