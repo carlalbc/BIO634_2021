@@ -106,7 +106,7 @@ After the salmon commands finish running, you should have a directory named `qua
 
 That’s it! Quantifying your RNA-seq data with salmon is that simple (and fast). Once you have your quantification results you can use them for downstream analysis with differential expression tools like [DESeq2](https://bioconductor.org/packages/DESeq2), [edgeR](https://bioconductor.org/packages/edgeR), [limma](https://bioconductor.org/packages/limma), or [sleuth](http://pachterlab.github.io/sleuth/). Using the [tximport](http://bioconductor.org/packages/tximport) package, you can import salmon’s transcript-level quantifications and optionally aggregate them to the gene level for gene-level differential expression analysis. You can read more about how to import salmon’s results into DESeq2 by reading the tximport section of the excellent [DESeq2 vignette](https://bioconductor.org/packages/DESeq2). For instructions on importing for use with edgeR or limma, see the [tximport vignette](http://bioconductor.org/packages/tximport). For preparing salmon output for use with sleuth, see the [wasabi](https://github.com/COMBINE-lab/wasabi) package.
 
-### Importing transcript abundance datasets with tximport 
+### I. Importing transcript abundance datasets with tximport:
 
 #### Bioconductor - tximport
 
@@ -176,7 +176,6 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 
 Now go to the following [link](https://www.bioconductor.org/help/course-materials/2016/CSAMA/lab-3-rnaseq/rnaseq_gene_CSAMA2016.html
 ) to where it says *"Locating BAM files and the sample table"* and start from there.
-
 
 
 # Useful workflows for RNA-seq data analyses
