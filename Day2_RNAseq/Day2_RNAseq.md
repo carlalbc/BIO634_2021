@@ -147,6 +147,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
 BiocManager::install(c("tximport", "tximportData", "rhdf5", "csaw"))
+```
 
 ### II. Analyzing RNA seq data with DESeq2:
 
@@ -180,18 +181,10 @@ Now go to the following [link](https://www.bioconductor.org/help/course-material
 
 # Useful workflows for RNA-seq data analyses
 
-- [Analyzing RNA-seq data with DESeq2 - 2021](http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html)
+- [Analyzing RNA-seq data with DESeq2, 2021](http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html)
 - [Differential Gene Expression using RNA-Seq. A Workflow](https://github.com/twbattaglia/RNAseq-workflow/blob/master/README.md)
 - [RNA-seq workflow: gene-level exploratory analysis and differential expression, 2018](https://www.bioconductor.org/packages/devel/workflows/vignettes/rnaseqGene/inst/doc/rnaseqGene.html)
 - [Importing transcript abundance datasets with Tximport, 2019 workflow](https://bioconductor.org/packages/release/bioc/vignettes/tximport/inst/doc/tximport.html).
-
 -  [Analysis of Genomics Data with R/Bioconductor](https://ivanek.github.io/analysisOfGenomicsDataWithR/06_RNAseqFromFASTQtoCountData_html.html)
 - [ARMOR (Automated Reproducible MOdular RNA-seq) a 2019 Snakemake RNA-seq workflow](https://github.com/csoneson/ARMOR).
 - [RNA-seq workflow - gene-level exploratory analysis and differential expression, 2016](https://www.bioconductor.org/help/course-materials/2016/CSAMA/lab-3-rnaseq/rnaseq_gene_CSAMA2016.html).
-
-
-
-
-
-
-
