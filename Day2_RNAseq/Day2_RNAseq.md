@@ -108,11 +108,11 @@ That’s it! Quantifying your RNA-seq data with salmon is that simple (and fast)
 
 ### I. Importing transcript abundance datasets with tximport:
 
-#### Bioconductor - tximport
+#### - Bioconductor - tximport
 
 - You can use [Tximport](https://bioconductor.org/packages/release/bioc/vignettes/tximport/inst/doc/tximport.html#import-transcript-level-estimates) to import the quantification files obtained
 
-#### Install these packages in R:
+#### - Install these packages in R:
 
 ```R
 #Open R by typing R in the terminal:
@@ -124,7 +124,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 BiocManager::install(c("TxDb.Hsapiens.UCSC.hg19.knownGene", "readr"))
 ```
 
-#### Load the tximport library in R:
+#### - Load the tximport library in R:
 
 **Note:** You can change `system.file`, for the `/path/to/dir` (Here we use `system.file` to locate the package directory, but for a typical use, we would just provide a path, e.g. `/path/to/dir`.)
 
@@ -138,7 +138,7 @@ list.files(dir)
 Continue to follow the steps in the [workflow](https://bioconductor.org/packages/release/bioc/vignettes/tximport/inst/doc/tximport.html#import-transcript-level-estimates) of **Tximport** with the default dataset, or any dataset of your interest.
 
 
-#### Personal installation of tximport package in case you work with RNAseq data in the future (skip for today):
+#### - Personal installation of tximport package in case you work with RNAseq data in the future (skip for today):
 
 To install this package, start R (version "3.6") and enter ( This is for future usage, you already have this installed on your Docker installation):
 
@@ -162,7 +162,7 @@ This [guideline](http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/in
 
 - To start let's install some R packages. In the terminal write the following:
 
-#### Step 1: Install R packages 
+#### Step 1: Install R packages (already installed in your Docker image)
 
 ```R
 # Type the following on the R command line
