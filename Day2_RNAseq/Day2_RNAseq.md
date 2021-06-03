@@ -116,11 +116,8 @@ That’s it! Quantifying your RNA-seq data with salmon is that simple (and fast)
 
 ```R
 #Open R by typing R in the terminal:
-
 R
-
 # then run:
-
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
