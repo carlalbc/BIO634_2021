@@ -112,7 +112,6 @@ That’s it! Quantifying your RNA-seq data with salmon is that simple (and fast)
 
 - You can use [Tximport](https://bioconductor.org/packages/release/bioc/vignettes/tximport/inst/doc/tximport.html#import-transcript-level-estimates) to import the quantification files obtained
 
-```
 ## Only install this package today:
 
 ```R
