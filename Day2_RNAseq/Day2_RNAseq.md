@@ -121,7 +121,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 BiocManager::install(c("tximport", "tximportData", "rhdf5", "csaw"))
 ```
 
-# Only install this package today:
+## Only install this package today:
 
 ```
 #Open R by typing:
