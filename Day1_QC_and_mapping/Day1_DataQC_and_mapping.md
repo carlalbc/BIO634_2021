@@ -214,7 +214,17 @@ The parameters used for Trimmomatic are defined as follows:
 `cd ~/data/mapping/fastq/SRR6170103`
 - Then run Trimmomatic:
 ```sh
-# Trimming and removing Illumina adapters
+
+# Download Illumina adapters
+wget https://raw.githubusercontent.com/timflutre/trimmomatic/master/adapters/TruSeq3-PE.fa
+
+# In case of having Nextera adaptors in excess (look at the FastQC report file) download from:
+# Copy paste the Raw into a file called "NexteraPE-PE.fa"
+https://github.com/usadellab/Trimmomatic/blob/main/adapters/NexteraPE-PE.fa 
+
+
+# Trimming and removing Illumina adapters (TruSeq3 adaptors)
+
 trimmomatic PE -phred33 \
             SRR6170103_1.fastq.gz \
             SRR6170103_2.fastq.gz \
@@ -227,6 +237,24 @@ trimmomatic PE -phred33 \
             TRAILING:3 \
             SLIDINGWINDOW:4:15 \
             MINLEN:36
+            
+            
+# Trimming and removing Illumina adapters (Nextera adaptors)
+
+trimmomatic PE -phred33 \
+            SRR6170103_1.fastq.gz \
+            SRR6170103_2.fastq.gz \
+            SRR6170103_1_paired.fastq.gz \
+            SRR6170103_1_unpaired.fastq.gz \
+            SRR6170103_2_paired.fastq.gz \
+            SRR6170103_2_unpaired.fastq.gz \
+            ILLUMINACLIP:NexteraPE-PE.fa:2:30:10 \
+            LEADING:3 \
+            TRAILING:3 \
+            SLIDINGWINDOW:4:15 \
+            MINLEN:36
+
+
 ```
 
 ### :beginner: Questions: 
@@ -242,10 +270,8 @@ trimmomatic PE -phred33 \
 Next, we can remove low quality reads of the sequences by trimming the bases at the 3' end of the reads with the following command:
 
 ```sh
-# Download Illumina adapters
-wget https://raw.githubusercontent.com/timflutre/trimmomatic/master/adapters/TruSeq3-PE.fa
 
-# Filtering low quality reads
+# Filtering low quality reads with 
 trimmomatic PE -phred33 -threads 1 -trimlog logfile2 SRR6170103_1_paired.fastq.gz \
             SRR6170103_2_paired.fastq.gz \
             SRR6170103_1_trim_paired.fastq \
