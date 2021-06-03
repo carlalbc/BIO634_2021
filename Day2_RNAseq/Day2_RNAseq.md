@@ -112,21 +112,14 @@ That’s it! Quantifying your RNA-seq data with salmon is that simple (and fast)
 
 - You can use [Tximport](https://bioconductor.org/packages/release/bioc/vignettes/tximport/inst/doc/tximport.html#import-transcript-level-estimates) to import the quantification files obtained
 
-To install this package, start R (version "3.6") and enter ( This is for future usage, you already have this installed on your Docker installation):
-
-```R
-if (!requireNamespace("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-
-BiocManager::install(c("tximport", "tximportData", "rhdf5", "csaw"))
 ```
-
 ## Only install this package today:
 
-```
-#Open R by typing:
+```R
+#Open R by typing R in the terminal:
 
 R
+
 # then run:
 
 if (!requireNamespace("BiocManager", quietly = TRUE))
@@ -135,8 +128,9 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 BiocManager::install(c("TxDb.Hsapiens.UCSC.hg19.knownGene", "readr"))
 ```
 
+#Load the library in R:
 
-- You can change `system.file`, for the `/path/to/dir` (Here we use `system.file` to locate the package directory, but for a typical use, we would just provide a path, e.g. `/path/to/dir`.)
+**Note:** You can change `system.file`, for the `/path/to/dir` (Here we use `system.file` to locate the package directory, but for a typical use, we would just provide a path, e.g. `/path/to/dir`.)
 
 ```R
 #Load the library
@@ -145,13 +139,22 @@ dir <- system.file("extdata", package = "tximportData")
 list.files(dir)
 ```
 
+Continue to follow the steps in the [workflow](https://bioconductor.org/packages/release/bioc/vignettes/tximport/inst/doc/tximport.html#import-transcript-level-estimates) of **Tximport** with the default dataset, or any dataset of your interest.
 
-You can follow the steps in the [workflow](https://bioconductor.org/packages/release/bioc/vignettes/tximport/inst/doc/tximport.html#import-transcript-level-estimates) of **Tximport** with any dataset of your interest.
 
+#Personal installation of this package in case you work with RNAseq data in the future:
+
+To install this package, start R (version "3.6") and enter ( This is for future usage, you already have this installed on your Docker installation):
+
+```R
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install(c("tximport", "tximportData", "rhdf5", "csaw"))
 
 ### II. Analyzing RNA seq data with DESeq2:
 
-If you already worked with Tximport on step I, you can start doing differential analyses on your quantified samples. Alternatively you can follow this guideline and skip the previous exercise.
+If you already worked with Tximport on step I, you can start doing differential analyses on your quantified samples. Alternatively you can follow this guideline from the start and skip the previous exercise.
 
 This [guideline](http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html) explains the steps to follow when doing differential expression analyses with RNAseq data.
 
