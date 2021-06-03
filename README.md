@@ -30,7 +30,7 @@ Carla Bello (carla.bello@ieu.uzh.ch) & Gregor Rot (gregor.rot@uzh.ch)
 11.00 - 12.00 |  **Continuation: RNA-seq**  | CB & GR
 12.00 - 13.30 | *Lunch break* 
 13.30 - 14.30 |  **Continuation: RNA-seq**  | CB & GR
-14.30 - 14.45 | *Coffee break* |
+14.45 - 15.00 | *Coffee break* |
 14:45 - 16:00 |  **Making sense of gene lists** <br /> [Presentation](gene_lists/gene_lists_presentation.pdf)  \| [Hands-on](gene_lists/gene_lists_exercises.md) | GR & CB
 
 ## Prerequisites for the course
