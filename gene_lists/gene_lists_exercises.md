@@ -8,7 +8,7 @@ Please clone this repository into the storage folder with:
 
 ```
 cd /home/student/data
-git clone https://github.com/carlalbc/BIO634_2020
+git clone https://github.com/carlalbc/BIO634_2021
 ```
 
 and work in the ***gene_lists*** folder.
