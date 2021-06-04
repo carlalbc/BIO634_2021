@@ -157,6 +157,42 @@ This [guideline](http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/in
 
 **NOTE**: Skip the Tximport part on this guideline and start from the **Count matrix input** section if you already did exercise I.
 
+#### Additional packages needed for this guideline to run:
+
+```R
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install(c("apeglm", "IHw","pheatmap", "vsn", "hexbin")
+```
+#### The "Exploring and exporting results" section of this guideline contains plots to be able to do that in Docker installation follow these steps:
+
+**- Plot 1: plotMA shows the log2 fold changes attributable to a given variable over the mean of normalized counts for all the samples**
+```R
+pdf(file = "MAplot_unfiltered.pdf", width = 8, height = 8)
+plotMA(resLFC, ylim=c(-2,2))
+dev.off()
+```
+**- Plot 2: Removing low count genes:**
+
+```R
+pdf(file = "MAplot_filtered.pdf", width = 8, height = 8)
+plotMA(resLFC, ylim=c(-2,2))
+dev.off()
+```
+**- Plot 3: Counts**
+```R
+pdf(file = "plotCounts.pdf", width = 8, height = 8)
+plotCounts(dds, gene=which.min(res$padj), intgroup="condition")
+dev.off()
+```
+**- Plot a PCA of the samples
+
+```R
+pdf(file = "PCAsamples.pdf", width = 8, height = 8)
+plotPCA(vsd, intgroup=c("condition", "type"))
+dev.off()
+```
+
 
 ### III. Exploration of airway library (OPTIONAL): 
 
