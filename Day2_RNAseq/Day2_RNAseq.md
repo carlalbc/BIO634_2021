@@ -166,13 +166,13 @@ BiocManager::install(c("apeglm", "IHw","pheatmap", "vsn", "hexbin")
 ```
 **NOTE**: The **Exploring and exporting results** section of this guideline contains plots. To be able to do that in the Docker installation, please follow these steps:
 
-**- Plot 1: plotMA shows the log2 fold changes attributable to a given variable over the mean of normalized counts for all the samples**
+**- Plot 1: An unfiltered plotMA, showing the log2 fold changes that are attributable to a given variable over the mean of normalized counts for all the samples**
 ```R
 pdf(file = "MAplot_unfiltered.pdf", width = 8, height = 8)
 plotMA(resLFC, ylim=c(-2,2))
 dev.off()
 ```
-**- Plot 2: Removing low count genes:**
+**- Plot 2: Filtered plotMA after removing low count genes:**
 
 ```R
 pdf(file = "MAplot_filtered.pdf", width = 8, height = 8)
