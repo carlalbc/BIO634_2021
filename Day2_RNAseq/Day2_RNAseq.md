@@ -164,7 +164,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 BiocManager::install(c("apeglm", "IHw","pheatmap", "vsn", "hexbin")
 ```
-**NOTE**: The "Exploring and exporting results" section of this guideline contains plots to be able to do that in Docker installation follow these steps:
+**NOTE**: The **Exploring and exporting results** section of this guideline contains plots to be able to do that in Docker installation follow these steps:
 
 **- Plot 1: plotMA shows the log2 fold changes attributable to a given variable over the mean of normalized counts for all the samples**
 ```R
