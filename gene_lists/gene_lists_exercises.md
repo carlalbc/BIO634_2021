@@ -13,6 +13,10 @@ git clone https://github.com/carlalbc/BIO634_2021
 
 and work in the ***gene_lists*** folder.
 
+```
+cd BIO634_2021/gene_lists
+```
+
 ## Exercise 1: Over-Representation / Enrichment Analysis
 
 Over-representation analysis is simply a 2x2 contigency table separately for each gene. 
