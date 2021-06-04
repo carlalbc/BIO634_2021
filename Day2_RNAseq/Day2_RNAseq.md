@@ -121,7 +121,7 @@ R
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
-BiocManager::install(c("TxDb.Hsapiens.UCSC.hg19.knownGene", "readr"))
+BiocManager::install(c("TxDb.Hsapiens.UCSC.hg19.knownGene", "readr", "apeglm"))
 ```
 
 #### - Load the tximport library in R:
