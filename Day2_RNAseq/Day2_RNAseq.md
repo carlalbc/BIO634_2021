@@ -179,7 +179,7 @@ pdf(file = "MAplot_filtered.pdf", width = 8, height = 8)
 plotMA(resLFC, ylim=c(-2,2))
 dev.off()
 ```
-**- Plot 3: Counts**
+**- Plot 3: Gene counts**
 ```R
 pdf(file = "plotCounts.pdf", width = 8, height = 8)
 plotCounts(dds, gene=which.min(res$padj), intgroup="condition")
